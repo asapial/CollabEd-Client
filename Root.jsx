@@ -1,8 +1,9 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import { Outlet } from "react-router";
-import Navbar from "./src/components/Navbar";
-import Footer from "./src/components/Footer";
+import Navbar from "./src/components/Shared/Navbar";
+import Footer from "./src/components/Shared/Footer";
+
 
 
 const Root = () => {
