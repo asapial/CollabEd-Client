@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import CollabEdNamePlate from "../NamePlate/CollabEdNamePlate";
 import { Link } from "react-router";
+import { AuthContext } from "../../main";
 
 const Navbar = () => {
+    const {user}=useContext(AuthContext);
+    console.log(user);
   const list = (
     <>
       {" "}
@@ -52,7 +55,7 @@ const Navbar = () => {
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            src={user?.profilePhoto} />
         </div>
       </div>
       </div>
