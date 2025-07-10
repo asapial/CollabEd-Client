@@ -4,11 +4,14 @@ import {
   FaPlusCircle,
   FaBookOpen,
   FaSignOutAlt,
+  FaUsersCog,
+  FaChalkboardTeacher,
+  FaFolderOpen,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../../main";
 
-const AdminLink = () => {
+const DashboardSideBar = ({links}) => {
   const { user,signOutUser } = useContext(AuthContext);
   const navigate=useNavigate();
     const handleSignOut = () => {
@@ -17,25 +20,7 @@ const AdminLink = () => {
     });
   };
 
-  const links=<> <Link to={"/dashboard/addRecipe"}>
-              <li className="flex items-center gap-3 text-lg  hover:text-green-600 cursor-pointer transition">
-                <FaPlusCircle className="text-xl" />
-                Add Recipe
-              </li>
-            </Link>
 
-            <Link to={"/dashboard/myRecipe"}>
-              <li className="flex items-center gap-3 text-lg  hover:text-purple-600 cursor-pointer transition">
-                <FaBookOpen className="text-xl" />
-                My Recipe
-              </li>
-            </Link>
-            <Link to={"/dashboard/myProfile"}>
-              <li className="flex items-center gap-3 text-lg  hover:text-blue-600 cursor-pointer transition">
-                <FaUserCircle className="text-xl" />
-                My Profile
-              </li>
-            </Link></>
 
   return (
     <div className="w-full h-full p-5 bg-base-200">
@@ -71,4 +56,4 @@ const AdminLink = () => {
   );
 };
 
-export default AdminLink;
+export default DashboardSideBar;
