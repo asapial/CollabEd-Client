@@ -10,7 +10,7 @@ import DashboardSideBar from "../components/dashboard/SideBar/DashboardSideBar";
 import DashboardDrawer from "../components/dashboard/SideBar/DashboardDrawer";
 import { FaChalkboardTeacher, FaFolderOpen, FaUsersCog } from "react-icons/fa";
 
-const AdminDashboardLayout = () => {
+const StudentDashboardLayout = () => {
   const [open, setOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const links = (
@@ -18,21 +18,27 @@ const AdminDashboardLayout = () => {
       <Link to="/dashboard/addRecipe">
         <li className="flex items-center gap-3 text-lg hover:text-green-600 cursor-pointer transition">
           <FaUsersCog className="text-xl" />
-          View All Users
+          View booked session
         </li>
       </Link>
 
       <Link to="/dashboard/myRecipe">
         <li className="flex items-center gap-3 text-lg hover:text-purple-600 cursor-pointer transition">
           <FaChalkboardTeacher className="text-xl" />
-          All Study Sessions
+          Create note
         </li>
       </Link>
 
       <Link to="/dashboard/myProfile">
         <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
           <FaFolderOpen className="text-xl" />
-          All Materials
+          Manage personal notes
+        </li>
+      </Link>
+      <Link to="/dashboard/myProfile">
+        <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
+          <FaFolderOpen className="text-xl" />
+          View all Materials
         </li>
       </Link>
     </>
@@ -95,4 +101,4 @@ const AdminDashboardLayout = () => {
   );
 };
 
-export default AdminDashboardLayout;
+export default StudentDashboardLayout;
