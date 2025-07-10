@@ -5,11 +5,11 @@ import Lottie from "lottie-react";
 
 const Banner = () => {
   return (
-<SectionContainer>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<SectionContainer className="bg-base-300">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center ">
           {/* Left content */}
           <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 dark:text-white">
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-primary">
               <span className="block">Shared</span>
               <span className="block bg-gradient-to-r from-indigo-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
                 Collaborative
@@ -17,7 +17,7 @@ const Banner = () => {
               <span className="block">Platform, For Your Education</span>
             </h1>
 
-            <p className="mt-6 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl mx-auto md:mx-0">
+            <p className="mt-6 text-base md:text-lg text-accent leading-relaxed max-w-xl mx-auto md:mx-0">
               Empower your learning journey with a smart platform built for collaboration,
               tutor guidance, and real-time educational support. Take notes, attend
               sessions, and grow together.

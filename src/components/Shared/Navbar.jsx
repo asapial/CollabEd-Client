@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import CollabEdNamePlate from "../NamePlate/CollabEdNamePlate";
 import { Link } from "react-router";
 import { AuthContext } from "../../main";
+import SectionContainer from "../SectionContainer/SectionContainer";
 
 const Navbar = () => {
     const {user}=useContext(AuthContext);
@@ -18,7 +19,9 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navBarContainer">
+    <SectionContainer className="bg-base-100 shadow-sm">
+            <div className="navbar ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -60,6 +63,10 @@ const Navbar = () => {
       </div>
       </div>
     </div>
+    </SectionContainer>
+    </div>
+
+
   );
 };
 
