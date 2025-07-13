@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaCalendarAlt, FaClock, FaInfoCircle } from "react-icons/fa";
 import useFetchApi from "../../Api/useFetchApi";
 import SectionContainer from "../../components/SectionContainer/SectionContainer";
+import { Link } from "react-router";
 
 const AllSessions = () => {
   const { getAllSessions } = useFetchApi();
@@ -54,9 +55,12 @@ const AllSessions = () => {
                   >
                     {getStatus(session.registrationStart, session.registrationEnd)}
                   </span>
-                  <button className="btn btn-sm btn-outline flex items-center gap-2">
+                  <Link to={`/sessionDetails/${session._id}`}>
+                                      <button className="btn btn-sm btn-outline flex items-center gap-2">
                     <FaInfoCircle /> Read More
                   </button>
+                  </Link>
+
                 </div>
               </div>
             </div>

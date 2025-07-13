@@ -21,6 +21,7 @@ import ManageNotes from "../pages/dashboard/student/ManageNotes";
 import StudyMaterials from "../pages/dashboard/student/StudyMaterials";
 import UpdateNotes from "../pages/dashboard/student/UpdateNotes";
 import AllSessions from "../pages/StudySessions/AllSessions";
+import SessionDetails from "../pages/StudySessions/SessionDetails";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
           path:"allSessions",
           Component: AllSessions
+      },
+      {
+          path:"sessionDetails/:id",
+          Component: SessionDetails
       }
     ],
   },

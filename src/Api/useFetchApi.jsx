@@ -96,6 +96,13 @@ const getAllSessionsGeneral = () => {
   return axiosSecure.get("/getAllSessionsGeneral").then((res) => res.data);
 };
 
+const getSessionById = (id) => {
+    return axiosSecure.get(`/getSessionById/${id}`).then((res) => res.data);
+};
+const bookSession = (bookingData) => {
+  return axiosSecure.post("/bookSession", bookingData).then((res) => res.data);
+}
+
   return {
 findTheUser,
 postTheUser,
@@ -119,7 +126,9 @@ deleteNote,
 getNoteById,
 updateNoteById,
 getSixSessions,
-getAllSessionsGeneral
+getAllSessionsGeneral,
+getSessionById,
+bookSession
 
 
   };
