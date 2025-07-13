@@ -15,27 +15,27 @@ const StudentDashboardLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const links = (
     <>
-      <Link to="/dashboard/addRecipe">
+      <Link to="/studentDashboard/bookedSession">
         <li className="flex items-center gap-3 text-lg hover:text-green-600 cursor-pointer transition">
           <FaUsersCog className="text-xl" />
           View booked session
         </li>
       </Link>
 
-      <Link to="/dashboard/myRecipe">
+      <Link to="/studentDashboard/createNote">
         <li className="flex items-center gap-3 text-lg hover:text-purple-600 cursor-pointer transition">
           <FaChalkboardTeacher className="text-xl" />
           Create note
         </li>
       </Link>
 
-      <Link to="/dashboard/myProfile">
+      <Link to="/studentDashboard/manageNotes">
         <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
           <FaFolderOpen className="text-xl" />
           Manage personal notes
         </li>
       </Link>
-      <Link to="/dashboard/myProfile">
+      <Link to="/studentDashboard/studyMaterials">
         <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
           <FaFolderOpen className="text-xl" />
           View all Materials

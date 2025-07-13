@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CreateNote = () => {
+const BookedSession = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const CreateNote = () => {
     );
 };
 
-export default CreateNote;
+export default BookedSession;

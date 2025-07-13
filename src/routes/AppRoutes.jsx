@@ -15,6 +15,10 @@ import Loading from "../pages/Others/Loading";
 import ManageUsers from "../pages/dashboard/admin/ManageUsers";
 import ManageSessions from "../pages/dashboard/admin/ManageSessions";
 import ManageMaterials from "../pages/dashboard/admin/ManageMaterials";
+import BookedSession from "../pages/dashboard/student/BookedSession";
+import CreateNote from "../pages/dashboard/student/CreateNote";
+import ManageNotes from "../pages/dashboard/student/ManageNotes";
+import StudyMaterials from "../pages/dashboard/student/StudyMaterials";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +103,22 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Banner,
+      },
+      {
+        path: "bookedSession",
+        Component: BookedSession
+      },
+      {
+        path: "createNote",
+        Component: CreateNote
+      },
+      {
+        path: "manageNotes",
+        Component: ManageNotes
+      },
+      {
+        path: "studyMaterials",
+        Component: StudyMaterials
       },
     ],
   },
