@@ -14,7 +14,7 @@ const Navbar = () => {
         <a>Item 1</a>
       </li>
       <li>
-        <a>Item 3</a>
+        <Link to={"/allSessions"}>Study sessions</Link>
       </li>
     </>
   );

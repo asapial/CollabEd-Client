@@ -20,6 +20,7 @@ import CreateNote from "../pages/dashboard/student/CreateNote";
 import ManageNotes from "../pages/dashboard/student/ManageNotes";
 import StudyMaterials from "../pages/dashboard/student/StudyMaterials";
 import UpdateNotes from "../pages/dashboard/student/UpdateNotes";
+import AllSessions from "../pages/StudySessions/AllSessions";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       //     path:"resetLink",
       //     Component: ResetLink
       // }
+      {
+          path:"allSessions",
+          Component: AllSessions
+      }
     ],
   },
   {

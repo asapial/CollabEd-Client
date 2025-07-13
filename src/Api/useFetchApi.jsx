@@ -92,6 +92,9 @@ const getSixSessions = () => {
   return axiosSecure.get("/getSixSessions").then((res) => res.data);
 };
 
+const getAllSessionsGeneral = () => {
+  return axiosSecure.get("/getAllSessionsGeneral").then((res) => res.data);
+};
 
   return {
 findTheUser,
@@ -115,7 +118,8 @@ getMyNotes,
 deleteNote,
 getNoteById,
 updateNoteById,
-getSixSessions
+getSixSessions,
+getAllSessionsGeneral
 
 
   };
