@@ -40,7 +40,7 @@ const Login = () => {
     loginWithGoogle()
       .then((data) => {
         findTheUser(data.user.email).then(data=>setPreviousUser(data));
-        (previousUser?<></>:postTheUser(data.user.email,{email:data.user.email, useruUid:data.user.uid, userRole:'Student' }))
+        (previousUser?<></>:postTheUser(data.user.email,{email:data.user.email, userUid:data.user.uid, userRole:'Student', image:data.user.photoURL, userName:data.user.displayName}))
         SuccessToast("Login Successful — Great to see you again!");
         navigate(`${location.state ? location.state : "/"}`);
       })

@@ -36,6 +36,14 @@ const useFetchApi = () => {
     return axiosSecure.get(`/getAllMaterials?tutorEmail=${email}`).then((res) => res.data); 
   }
 
+  const getAllUsers = (search) => {
+    return axiosSecure.get(`/getAllUsers?search=${search}`).then((res) => res.data);
+  };
+
+  const updateUserRole = (id, role) => {
+    return axiosSecure.patch(`/updateUserRole?id=${id}&role=${role}`).then((res) => res.data);
+  };
+
 
 
 
@@ -48,7 +56,9 @@ mySession,
 resendApprovalRequest,
 approvedSessions,
 uploadMaterials,
-getAllMaterials
+getAllMaterials,
+getAllUsers,
+updateUserRole
 
 
   };

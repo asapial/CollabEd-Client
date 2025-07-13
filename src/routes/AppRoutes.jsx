@@ -12,6 +12,9 @@ import CreateSession from "../pages/dashboard/tutor/CreateSession";
 import MySessions from "../pages/dashboard/tutor/MySessions";
 import ViewMaterials from "../pages/dashboard/tutor/ViewMaterials";
 import Loading from "../pages/Others/Loading";
+import ManageUsers from "../pages/dashboard/admin/ManageUsers";
+import ManageSessions from "../pages/dashboard/admin/ManageSessions";
+import ManageMaterials from "../pages/dashboard/admin/ManageMaterials";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,19 @@ const router = createBrowserRouter([
         index: true,
         Component: Banner,
       },
+      {
+        path: "allUsers",
+        Component: ManageUsers ,
+      },
+      {
+        path: "allStudySessions",
+        Component: ManageSessions ,
+      },
+      {
+        path: "allMaterials",
+        Component: ManageMaterials ,
+      },
+
     ],
   },
   {

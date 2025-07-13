@@ -15,21 +15,21 @@ const AdminDashboardLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const links = (
     <>
-      <Link to="/dashboard/addRecipe">
+      <Link to="/adminDashboard/allUsers">
         <li className="flex items-center gap-3 text-lg hover:text-green-600 cursor-pointer transition">
           <FaUsersCog className="text-xl" />
           View All Users
         </li>
       </Link>
 
-      <Link to="/dashboard/myRecipe">
+      <Link to="/dashboard/allStudySessions">
         <li className="flex items-center gap-3 text-lg hover:text-purple-600 cursor-pointer transition">
           <FaChalkboardTeacher className="text-xl" />
           All Study Sessions
         </li>
       </Link>
 
-      <Link to="/dashboard/myProfile">
+      <Link to="/dashboard/allMaterials">
         <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
           <FaFolderOpen className="text-xl" />
           All Materials
