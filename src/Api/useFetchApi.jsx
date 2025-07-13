@@ -24,6 +24,18 @@ const useFetchApi = () => {
     return axiosSecure.patch(`/updateSessionStatus?id=${id}`).then((res) => res.data);
   };
 
+  const approvedSessions = (email) => {
+    return axiosSecure.get(`/approvedSessionsList?tutorEmail=${email}`).then((res) => res.data);
+  };
+
+  const uploadMaterials = (data) => {
+    return axiosSecure.post(`/uploadMaterials`, data).then((res) => res.data);  
+  }
+
+  const getAllMaterials=(email)=>{
+    return axiosSecure.get(`/getAllMaterials?tutorEmail=${email}`).then((res) => res.data); 
+  }
+
 
 
 
@@ -33,7 +45,11 @@ findTheUser,
 postTheUser,
 createSession,
 mySession,
-resendApprovalRequest
+resendApprovalRequest,
+approvedSessions,
+uploadMaterials,
+getAllMaterials
+
 
   };
 };

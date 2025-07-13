@@ -4,6 +4,7 @@ import { AuthContext } from "../../../main";
 import { FaCheckCircle, FaClock, FaSyncAlt, FaTimesCircle } from "react-icons/fa";
 import useFetchApi from "../../../Api/useFetchApi";
 import { ErrorToast, SuccessToast } from "../../../utils/ToastMaker";
+import { Link } from "react-router";
 // import { toast } from "react-hot-toast";
 
 const MySession = () => {
@@ -99,6 +100,17 @@ const MySession = () => {
             <FaSyncAlt className="text-warning" />
             Resend Approval Request
           </button>
+        )}
+        {session.status === "approved" && (
+          <Link to={`/tutorDashboard/uploadMaterials/${session._id}`}>
+          <button
+            className="btn btn-sm btn-outline btn-warning flex items-center gap-2 w-fit mt-2"
+          >
+            <FaSyncAlt className="text-warning" />
+            Upload Materials
+          </button>
+          </Link>
+
         )}
       </div>
     </div>

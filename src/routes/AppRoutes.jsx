@@ -63,13 +63,16 @@ const router = createBrowserRouter([
         Component: MySessions
       },
       {
+        path:"uploadMaterials/:id",
+        Component:UploadMaterials
+      },
+      {
         path:"uploadMaterials",
         Component:UploadMaterials
       },
       {
         path:"viewMaterials",
-        // Component:ViewMaterials
-        Component:Loading
+        Component:ViewMaterials
       }
     ],
   },
