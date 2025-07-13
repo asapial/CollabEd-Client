@@ -13,29 +13,29 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { AuthContext } from "../../../main";
+import useFetchApi from "../../../Api/useFetchApi";
+import { SuccessToast } from "../../../utils/ToastMaker";
 
 const CreateSession = () => {
   const { user } = useContext(AuthContext);
+  const {createSession}=useFetchApi();
 // const user=null;
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     const sessionData = {
       ...data,
-      registrationFee: 0,
+      // registrationFee: 0,
       status: "pending",
     };
 
-    fetch("/api/create-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(sessionData),
+    console.log("Session Data:", sessionData);
+    createSession(sessionData).then((res)=>{
+      console.log("Session Created:", res);
+      if(res.acknowledged){
+        SuccessToast("Session Created Successfully!");
+      }
     })
-      .then((res) => res.json())
-      .then(() => {
-        reset();
-        // toast.success("Session created successfully");
-      });
   };
 
   return (

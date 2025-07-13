@@ -12,13 +12,18 @@ const useFetchApi = () => {
     return axiosSecure.post(`/postTheUser?email=${email}`,data).then((res) => res.data);
   };
 
+  const createSession = (sessionData) => {
+    return axiosSecure.post("/createSession", sessionData).then((res) => res.data);
+  };
+
 
 
 
 
   return {
 findTheUser,
-postTheUser
+postTheUser,
+createSession
 
   };
 };
