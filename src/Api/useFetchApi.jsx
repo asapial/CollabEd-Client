@@ -69,7 +69,25 @@ const useFetchApi = () => {
     return axiosSecure.delete(`/deleteMaterial?id=${id}`).then((res) => res.data);
   }
 
+  const createNote = (noteData) => {
+  return axiosSecure.post("/createNote", noteData).then((res) => res.data);
+};
 
+const getMyNotes= (email) => {
+  return axiosSecure.get(`/getMyNotes?email=${email}`).then((res) => res.data);
+};
+
+const deleteNote = (id) => {
+  return axiosSecure.delete(`/deleteNote?id=${id}`).then((res) => res.data);
+};
+
+const getNoteById = (id) => {
+  return axiosSecure.get(`/getNoteById/${id}`).then((res) => res.data);
+};
+
+const updateNoteById = (id, noteData) => {
+  return axiosSecure.patch(`/updateNote/${id}`, noteData).then((res) => res.data);
+};
 
 
   return {
@@ -88,7 +106,12 @@ approveSession,
 deleteSession,
 rejectSession,
 getAllMaterialsAdmin,
-deleteMaterial
+deleteMaterial,
+createNote,
+getMyNotes,
+deleteNote,
+getNoteById,
+updateNoteById
 
 
   };
