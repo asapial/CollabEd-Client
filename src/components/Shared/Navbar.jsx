@@ -19,7 +19,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className=" w-full max-w-7xl">
+    <div className=" w-full max-w-7xl mx-auto ">
       <div className="navbar ">
         <div className="navbar-start">
           <div className="dropdown">
@@ -55,17 +55,20 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{list}</ul>
         </div>
         <div className="navbar-end">
+          <button className="btn btn-primary rounded-2xl">
+            <Link to={"/login"}>Login</Link>
+          </button>
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar mr-12 md:m-0"
           >
             <div className="w-10 rounded-full">
-              {/* <img alt="Tailwind CSS Navbar component" src={user?.profilePhoto} /> */}
-              <img
+              <img src={user?.profilePhoto} />
+              {/* <img
                 alt="Tailwind CSS Navbar component"
                 src="https://img.daisyui.com/images/profile/demo/batperson@192.webp"
-              />
+              /> */}
             </div>
           </div>
         </div>

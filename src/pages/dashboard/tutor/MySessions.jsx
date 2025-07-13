@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../../../main";
 import { FaSyncAlt } from "react-icons/fa";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 
 const MySession = () => {
   const { user } = useContext(AuthContext);
@@ -29,10 +29,10 @@ const MySession = () => {
       return res.json();
     },
     onSuccess: () => {
-      toast.success("Approval request sent again.");
+    //   toast.success("Approval request sent again.");
       queryClient.invalidateQueries(["mySessions", user?.email]);
     },
-    onError: () => toast.error("Failed to resend request."),
+    // onError: () => toast.error("Failed to resend request."),
   });
 
   const handleResendRequest = (id) => {

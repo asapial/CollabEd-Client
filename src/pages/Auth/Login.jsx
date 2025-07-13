@@ -9,14 +9,16 @@ import { ErrorToast, SuccessToast } from "../../utils/ToastMaker";
 import { AuthContext } from "../../main";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import CollabEdNamePlate from "../../components/NamePlate/CollabEdNamePlate";
-
+import useFetchApi from "../../Api/useFetchApi";
 
 const Login = () => {
   const location = useLocation();
   const { loginUser, loginWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [previousUser,setPreviousUser]=useState(false);
   const navigate = useNavigate();
   // const location=useLocation();
+  const {findTheUser,postTheUser}=useFetchApi();
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -36,7 +38,9 @@ const Login = () => {
 
   const handleLoginWithGmail = () => {
     loginWithGoogle()
-      .then(() => {
+      .then((data) => {
+        findTheUser(data.user.email).then(data=>setPreviousUser(data));
+        (previousUser?<></>:postTheUser(data.user.email,{email:data.user.email, useruUid:data.user.uid, userRole:'Student' }))
         SuccessToast("Login Successful — Great to see you again!");
         navigate(`${location.state ? location.state : "/"}`);
       })

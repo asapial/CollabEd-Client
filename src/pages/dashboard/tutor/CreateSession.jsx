@@ -40,7 +40,7 @@ const CreateSession = () => {
 
   return (
     <div className="min-h-screen py-10 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-10 items-start gap-6 shadow-2xl bg-base-100 p-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-10 items-start gap-6 shadow-2xl  bg-base-100 p-8 rounded-2xl">
         {/* Lottie - 30% */}
         <div className="flex justify-center items-center md:col-span-3 h-full">
           <div className="">
@@ -50,7 +50,7 @@ const CreateSession = () => {
 
         {/* Form - 70% */}
 
-        <div className="card w-full md:col-span-7 p-6 shadow-lg rounded-xl">
+        <div className="card w-full md:col-span-7 p-6  rounded-xl">
           <h2 className="text-3xl font-bold text-center mb-8 tracking-tight">
             Create Study Session
           </h2>
