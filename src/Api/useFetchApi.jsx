@@ -61,6 +61,14 @@ const useFetchApi = () => {
   }
 
 
+ const getAllMaterialsAdmin =()=>{
+    return axiosSecure.get(`/getAllMaterialsAdmin`).then((res) => res.data);
+ }
+
+ const deleteMaterial = (id) => {
+    return axiosSecure.delete(`/deleteMaterial?id=${id}`).then((res) => res.data);
+  }
+
 
 
 
@@ -78,7 +86,9 @@ updateUserRole,
 getAllSessions,
 approveSession,
 deleteSession,
-rejectSession
+rejectSession,
+getAllMaterialsAdmin,
+deleteMaterial
 
 
   };
