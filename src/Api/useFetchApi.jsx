@@ -88,6 +88,9 @@ const getNoteById = (id) => {
 const updateNoteById = (id, noteData) => {
   return axiosSecure.patch(`/updateNote/${id}`, noteData).then((res) => res.data);
 };
+const getSixSessions = () => {
+  return axiosSecure.get("/getSixSessions").then((res) => res.data);
+};
 
 
   return {
@@ -111,7 +114,8 @@ createNote,
 getMyNotes,
 deleteNote,
 getNoteById,
-updateNoteById
+updateNoteById,
+getSixSessions
 
 
   };
