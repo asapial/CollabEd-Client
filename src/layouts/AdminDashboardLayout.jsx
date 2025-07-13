@@ -22,14 +22,14 @@ const AdminDashboardLayout = () => {
         </li>
       </Link>
 
-      <Link to="/dashboard/allStudySessions">
+      <Link to="/adminDashboard/allStudySessions">
         <li className="flex items-center gap-3 text-lg hover:text-purple-600 cursor-pointer transition">
           <FaChalkboardTeacher className="text-xl" />
           All Study Sessions
         </li>
       </Link>
 
-      <Link to="/dashboard/allMaterials">
+      <Link to="/adminDashboard/allMaterials">
         <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
           <FaFolderOpen className="text-xl" />
           All Materials

@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       },
       {
         path: "allStudySessions",
-        Component: ManageSessions ,
+        Component: ManageSessions  ,
       },
       {
         path: "allMaterials",

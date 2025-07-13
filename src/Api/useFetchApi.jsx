@@ -44,6 +44,22 @@ const useFetchApi = () => {
     return axiosSecure.patch(`/updateUserRole?id=${id}&role=${role}`).then((res) => res.data);
   };
 
+  const getAllSessions=()=>{
+    return axiosSecure.get(`/getAllSessions`).then((res) => res.data);
+  }
+
+  const approveSession= (data) => {
+    return axiosSecure.patch(`/approveSession`, data).then((res) => res.data);
+  }
+
+  const deleteSession= (id) => {
+    return axiosSecure.delete(`/deleteSession?id=${id}`).then((res) => res.data);
+  }
+
+  const rejectSession = (id) => {
+    return axiosSecure.patch(`/rejectSession?id=${id}`).then((res) => res.data);
+  }
+
 
 
 
@@ -58,7 +74,11 @@ approvedSessions,
 uploadMaterials,
 getAllMaterials,
 getAllUsers,
-updateUserRole
+updateUserRole,
+getAllSessions,
+approveSession,
+deleteSession,
+rejectSession
 
 
   };
