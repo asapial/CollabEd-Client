@@ -1,84 +1,107 @@
 import React, { useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../../../main";
-import { FaSyncAlt } from "react-icons/fa";
+import { FaCheckCircle, FaClock, FaSyncAlt, FaTimesCircle } from "react-icons/fa";
+import useFetchApi from "../../../Api/useFetchApi";
+import { ErrorToast, SuccessToast } from "../../../utils/ToastMaker";
 // import { toast } from "react-hot-toast";
 
 const MySession = () => {
   const { user } = useContext(AuthContext);
   const queryClient = useQueryClient();
+  const { mySession,resendApprovalRequest } = useFetchApi();
 
   // ✅ Fetch tutor's own sessions
   const { data: sessions = [], isLoading } = useQuery({
     queryKey: ["mySessions", user?.email],
     queryFn: async () => {
-      const res = await fetch(`/api/my-sessions?tutorEmail=${user?.email}`);
-      return res.json();
+      // const res = await fetch(`/api/my-sessions?tutorEmail=${user?.email}`);
+      const res = await mySession(user?.email);
+      console.log("Fetched Sessions:", res);
+      return res;
     },
     enabled: !!user?.email,
   });
 
   // 🔁 Resend approval request (change status to "pending")
-  const resendMutation = useMutation({
-    mutationFn: async (id) => {
-      const res = await fetch(`/api/update-session-status/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "pending" }),
-      });
-      return res.json();
-    },
-    onSuccess: () => {
-    //   toast.success("Approval request sent again.");
-      queryClient.invalidateQueries(["mySessions", user?.email]);
-    },
-    // onError: () => toast.error("Failed to resend request."),
-  });
 
   const handleResendRequest = (id) => {
-    resendMutation.mutate(id);
+    resendApprovalRequest(id)
+      .then((res) => {
+        console.log("Resend Request Response:", res);
+        if (res.modifiedCount > 0) {
+          SuccessToast("Approval request resent successfully!");
+          queryClient.invalidateQueries(["mySessions", user?.email]);
+          // console.log("Approval request resent successfully!");
+        } else {
+          ErrorToast("Failed to resend approval request.");
+          // console.error("Failed to resend approval request.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error resending approval request:", error);
+      });
   };
+
+  console.log("My Sessions:", sessions);
 
   if (isLoading) {
     return <div className="text-center text-lg">Loading sessions...</div>;
   }
 
   return (
-    <div className="min-h-screen px-4 py-10 max-w-6xl mx-auto">
+    <div className="min-h-screen px-4 py-10 max-w-7xl mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">My Study Sessions</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {sessions.map((session) => (
-          <div key={session._id} className="card bg-base-100 shadow-md border">
-            <div className="card-body space-y-3">
-              <h3 className="card-title">{session.title}</h3>
-              <p className="text-sm">{session.description?.slice(0, 120)}...</p>
-              <div className="text-sm">
-                <strong>Status: </strong>
-                <span
-                  className={`badge ${
-                    session.status === "approved"
-                      ? "badge-success"
-                      : session.status === "rejected"
-                      ? "badge-error"
-                      : "badge-warning"
-                  }`}
-                >
-                  {session.status}
-                </span>
-              </div>
+ <div
+      key={session._id}
+      className="card bg-base-100 shadow-md border border-base-300 hover:shadow-lg transition-all duration-300"
+    >
+      <div className="card-body space-y-4">
+        {/* Title */}
+        <h3 className="card-title text-lg md:text-xl font-semibold">
+          <FaCheckCircle className="text-primary" />
+          <span>{session.title}</span>
+        </h3>
 
-              {/* Button for Rejected Sessions */}
-              {session.status === "rejected" && (
-                <button
-                  onClick={() => handleResendRequest(session._id)}
-                  className="btn btn-sm btn-outline btn-warning flex items-center gap-2 w-fit"
-                >
-                  <FaSyncAlt /> Resend Approval Request
-                </button>
-              )}
-            </div>
-          </div>
+        {/* Description */}
+        <p className="text-sm text-base-content/80 leading-relaxed">
+          {session.description?.slice(0, 120)}...
+        </p>
+
+        {/* Status */}
+        <div className="text-sm font-medium flex items-center gap-2">
+          <span className="text-base-content/70">Status:</span>
+          <span
+            className={`badge px-3 py-1 text-sm capitalize ${
+              session.status === "approved"
+                ? "badge-success"
+                : session.status === "rejected"
+                ? "badge-error"
+                : "badge-warning"
+            } flex items-center gap-1`}
+          >
+            {session.status === "approved" && <FaCheckCircle />}
+            {session.status === "rejected" && <FaTimesCircle />}
+            {session.status === "pending" && <FaClock />}
+            {session.status}
+          </span>
+        </div>
+
+        {/* Resend Request */}
+        {session.status === "rejected" && (
+          <button
+            onClick={() => handleResendRequest(session._id)}
+            className="btn btn-sm btn-outline btn-warning flex items-center gap-2 w-fit mt-2"
+          >
+            <FaSyncAlt className="text-warning" />
+            Resend Approval Request
+          </button>
+        )}
+      </div>
+    </div>
         ))}
       </div>
     </div>

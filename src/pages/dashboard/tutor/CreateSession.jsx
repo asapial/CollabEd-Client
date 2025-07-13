@@ -30,7 +30,7 @@ const CreateSession = () => {
     };
 
     console.log("Session Data:", sessionData);
-    createSession(sessionData).then((res)=>{
+    createSession(user.email,sessionData).then((res)=>{
       console.log("Session Created:", res);
       if(res.acknowledged){
         SuccessToast("Session Created Successfully!");
