@@ -102,6 +102,17 @@ const getSessionById = (id) => {
 const bookSession = (bookingData) => {
   return axiosSecure.post("/bookSession", bookingData).then((res) => res.data);
 }
+const getMyBookedSessions = (email) => {
+  return axiosSecure.get(`/getMyBookedSessions?email=${email}`).then((res) => res.data);
+};
+
+const postReview = (data) => {
+  return axiosSecure.patch("/postReview", data).then((res) => res.data);
+};
+
+const getSessionReviews=(id)=>{
+  return axiosSecure.get(`/getSessionReviews?id=${id}`).then((res) => res.data);
+}
 
   return {
 findTheUser,
@@ -128,7 +139,10 @@ updateNoteById,
 getSixSessions,
 getAllSessionsGeneral,
 getSessionById,
-bookSession
+bookSession,
+getMyBookedSessions,
+postReview,
+getSessionReviews
 
 
   };
