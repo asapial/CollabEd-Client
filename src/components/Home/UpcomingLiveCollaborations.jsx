@@ -34,7 +34,7 @@ const upcomingSessions = [
 
 const UpcomingLiveCollaborations = () => {
   return (
-    <SectionContainer>
+    <SectionContainer className="bg-base-200">
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold">🚀 Upcoming Live Collaborations</h2>
         <p className="text-base-content text-opacity-70 mt-2">
