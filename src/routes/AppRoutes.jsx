@@ -80,7 +80,7 @@ const router = createBrowserRouter([
   },
   {
     path: "tutorDashboard",
-    Component: TutorDashboardLayout,
+    element:<PrivateRoute requiredRole={"Tutor"}><TutorDashboardLayout></TutorDashboardLayout></PrivateRoute>,
     children: [
       {
         index: true,
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
   },
   {
     path: "studentDashboard",
-    Component: StudentDashboardLayout,
+    element:<PrivateRoute requiredRole={"Student"}><StudentDashboardLayout></StudentDashboardLayout></PrivateRoute>,
     children: [
       {
         index: true,
