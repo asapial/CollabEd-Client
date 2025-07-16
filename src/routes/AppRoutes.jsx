@@ -23,6 +23,7 @@ import UpdateNotes from "../pages/dashboard/student/UpdateNotes";
 import AllSessions from "../pages/StudySessions/AllSessions";
 import SessionDetails from "../pages/StudySessions/SessionDetails";
 import PrivateRoute from "../RouteProtector/PrivateRoute";
+import AllTutors from "../pages/Tutors/AllTutors";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
           path:"sessionDetails/:id",
           Component: SessionDetails
+      },
+      {
+          path:"tutors",
+          Component: AllTutors
       }
     ],
   },

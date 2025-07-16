@@ -11,7 +11,7 @@ const Navbar = () => {
     <>
       {" "}
       <li>
-        <a>Item 1</a>
+        <Link to={"/tutors"}>Tutor</Link>
       </li>
       <li>
         <Link to={"/allSessions"}>Study sessions</Link>
@@ -77,7 +77,7 @@ const Navbar = () => {
             className="btn btn-ghost btn-circle avatar mr-12 md:m-0"
           >
             <div className="w-10 rounded-full">
-              <img src={user?.profilePhoto} />
+              <img src={user?.photoURL} />
               {/* <img
                 alt="Tailwind CSS Navbar component"
                 src="https://img.daisyui.com/images/profile/demo/batperson@192.webp"

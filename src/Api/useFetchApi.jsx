@@ -114,6 +114,11 @@ const getSessionReviews=(id)=>{
   return axiosSecure.get(`/getSessionReviews?id=${id}`).then((res) => res.data);
 }
 
+const fetchTutors=()=>{
+  return axiosSecure.get(`/allTutors`).then((res) => res.data);
+}
+
+
 
 
   return {
@@ -144,7 +149,8 @@ getSessionById,
 bookSession,
 getMyBookedSessions,
 postReview,
-getSessionReviews
+getSessionReviews,
+fetchTutors
 
 
   };
