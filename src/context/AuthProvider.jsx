@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 
 import { AuthContext } from '../main';
 import { auth } from '../services/firebase.init';
+import axios from 'axios';
 
 
 const AuthProvider = ({children}) => {
@@ -69,15 +70,39 @@ const AuthProvider = ({children}) => {
     return sendPasswordResetEmail(auth,email);
   }
 
-  useEffect(() => {
-    setLoading(true);
-    const unsubscribe = onAuthStateChanged(auth, (userData) => {
-      setUser(userData);
-      setLoading(false);
-    });
+useEffect(() => {
+  setLoading(true);
 
-    return () => unsubscribe(); 
-  }, [authActionCount]); 
+  const unsubscribe = onAuthStateChanged(auth, async (userData) => {
+    if (userData) {
+      try {
+        const dbUser = await axios
+          .get(`http://localhost:3000/searchTheUser?email=${userData.email}`)
+          .then((res) => res.data);
+
+        console.log("MongoDB user data:", dbUser);
+
+        setUser({
+          uid: userData.uid,
+          email: userData.email,
+          displayName: userData.displayName,
+          photoURL: userData.photoURL,
+          ...dbUser,
+        });
+      } catch (err) {
+        console.error("Failed to fetch user from MongoDB:", err);
+        setUser(userData);
+      }
+    } else {
+      setUser(null);
+    }
+
+    setLoading(false);
+  });
+
+  return () => unsubscribe();
+}, [authActionCount]);
+
 
 
   // data fetching part 

@@ -22,6 +22,7 @@ import StudyMaterials from "../pages/dashboard/student/StudyMaterials";
 import UpdateNotes from "../pages/dashboard/student/UpdateNotes";
 import AllSessions from "../pages/StudySessions/AllSessions";
 import SessionDetails from "../pages/StudySessions/SessionDetails";
+import PrivateRoute from "../RouteProtector/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
   },
   {
     path: "adminDashboard",
-    Component: AdminDashboardLayout,
+    element:<PrivateRoute requiredRole={"Admin"}><AdminDashboardLayout></AdminDashboardLayout></PrivateRoute>,
     children: [
       {
         index: true,

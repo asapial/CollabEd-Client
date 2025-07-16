@@ -36,18 +36,34 @@ const Login = () => {
       });
   };
 
-  const handleLoginWithGmail = () => {
-    loginWithGoogle()
-      .then((data) => {
-        findTheUser(data.user.email).then(data=>setPreviousUser(data));
-        (previousUser?<></>:postTheUser(data.user.email,{email:data.user.email, userUid:data.user.uid, userRole:'Student', image:data.user.photoURL, userName:data.user.displayName}))
+const handleLoginWithGmail = () => {
+  loginWithGoogle()
+    .then((data) => {
+      const email = data.user.email;
+      const userInfo = {
+        email: data.user.email,
+        userUid: data.user.uid,
+        userRole: "Student",
+        image: data.user.photoURL,
+        userName: data.user.displayName,
+      };
+
+      findTheUser(email).then((foundUser) => {
+        console.log("Found user:", foundUser);
+
+        if (!foundUser) {
+          postTheUser(email, userInfo);
+        }
+
         SuccessToast("Login Successful — Great to see you again!");
         navigate(`${location.state ? location.state : "/"}`);
-      })
-      .catch((error) => {
-        ErrorToast(`Error Occurred: ${error.message}`);
       });
-  };
+    })
+    .catch((error) => {
+      ErrorToast(`Error Occurred: ${error.message}`);
+    });
+};
+
   return (
     <section className="min-h-screen custom-gradient flex items-center justify-center px-4 py-10">
       <title>PlayPulse | Login</title>

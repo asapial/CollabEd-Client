@@ -16,6 +16,19 @@ const Navbar = () => {
       <li>
         <Link to={"/allSessions"}>Study sessions</Link>
       </li>
+      {user?.userRole === "Tutor" && (
+              <li>
+        <Link to={"/tutorDashboard"}>Dashboard</Link>
+      </li>)}
+      {user?.userRole === "Admin" && (
+              <li>
+        <Link to={"/adminDashboard"}>Dashboard</Link>
+      </li>)}
+      {user?.userRole === "Student" && (
+              <li>
+        <Link to={"/studentDashboard"}>Dashboard</Link>
+      </li>)}
+
     </>
   );
   return (
