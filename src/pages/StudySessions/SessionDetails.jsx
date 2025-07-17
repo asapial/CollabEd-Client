@@ -20,7 +20,8 @@ const SessionDetails = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
-  const { getSessionById, getSessionReviews, bookSession, postReview } = useFetchApi();
+  const { getSessionById, getSessionReviews, bookSession, postReview } =
+    useFetchApi();
 
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -38,7 +39,8 @@ const SessionDetails = () => {
   const currentDate = new Date();
   const registrationStart = new Date(session?.registrationStart);
   const registrationEnd = new Date(session?.registrationEnd);
-  const isRegistrationOpen = currentDate >= registrationStart && currentDate <= registrationEnd;
+  const isRegistrationOpen =
+    currentDate >= registrationStart && currentDate <= registrationEnd;
 
   const handleBooking = () => {
     if (parseFloat(session?.registrationFee) > 0) {
@@ -99,16 +101,22 @@ const SessionDetails = () => {
 
           <div className="grid md:grid-cols-2 gap-4">
             <p className="flex items-center gap-2">
-              <FaCalendarAlt /> Registration: {session.registrationStart} to {session.registrationEnd}
+              <FaCalendarAlt /> Registration: {session.registrationStart} to{" "}
+              {session.registrationEnd}
             </p>
             <p className="flex items-center gap-2">
-              <FaCalendarAlt /> Class: {session.classStart} to {session.classEnd}
+              <FaCalendarAlt /> Class: {session.classStart} to{" "}
+              {session.classEnd}
             </p>
             <p className="flex items-center gap-2">
               <FaCalendarAlt /> Duration: {session.duration}
             </p>
             <p className="flex items-center gap-2">
-              <FaMoneyBillWave /> Fee: {parseFloat(session.registrationFee) > 0 ? `$${session.registrationFee}` : "Free"}
+              <FaMoneyBillWave /> Fee:{" "}
+              {parseFloat(session.registrationFee) > 0
+                ? `$${session.registrationFee}`
+                : "Free"}
+              {/* <FaMoneyBillWave /> Fee: {session.registrationFee} */}
             </p>
           </div>
 
@@ -123,7 +131,6 @@ const SessionDetails = () => {
           </div>
 
           <div className="mt-10">
-
             {/* ⭐ Review Input Form */}
             <form onSubmit={handleReviewSubmit} className="space-y-4">
               <h4 className="text-lg font-semibold">Leave a Review</h4>
@@ -153,29 +160,31 @@ const SessionDetails = () => {
                 />
               </div>
 
-              <button className="btn btn-accent flex items-center gap-2" type="submit">
+              <button
+                className="btn btn-accent flex items-center gap-2"
+                type="submit"
+              >
                 <FaPaperPlane /> Submit Review
               </button>
             </form>
 
-                        <h3 className="text-xl font-bold mb-4">Student Reviews</h3>
+            <h3 className="text-xl font-bold mb-4">Student Reviews</h3>
             {reviews.length === 0 ? (
               <p>No reviews available.</p>
             ) : (
               <div className="space-y-4 mb-6">
-              {reviews.map((review) => {
-  if (review.review || review.rating) {
-    return (
-      <div key={review._id} className="p-4 border rounded-md">
-        <p className="font-semibold">{review.studentEmail}</p>
-        <p className="text-sm">Rating: {review.rating} / 5</p>
-        <p>{review.review}</p>
-      </div>
-    );
-  }
-  return null;
-})}
-
+                {reviews.map((review) => {
+                  if (review.review || review.rating) {
+                    return (
+                      <div key={review._id} className="p-4 border rounded-md">
+                        <p className="font-semibold">{review.studentEmail}</p>
+                        <p className="text-sm">Rating: {review.rating} / 5</p>
+                        <p>{review.review}</p>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             )}
           </div>

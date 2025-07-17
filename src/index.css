@@ -1,9 +1,9 @@
  @import "tailwindcss";
- @plugin "daisyui" {
+ /* @plugin "daisyui" {
    themes: light;
- }
+ } */
 
-@plugin "daisyui/theme" {
+/* @plugin "daisyui/theme" {
   name: "CollabEdLight";
   default: false;
   prefersdark: false;
@@ -36,10 +36,10 @@
   --border: 2px;
   --depth: 1;
   --noise: 0;
-}
+} */
 
 
-@plugin "daisyui/theme" {
+/* @plugin "daisyui/theme" {
   name: "CollabEdDark";
   default: false;
   prefersdark: false;
@@ -72,6 +72,11 @@
   --border: 1px;
   --depth: 0;
   --noise: 1;
+} */
+
+
+@plugin "daisyui" {
+  themes: light , dark ;
 }
 
 
