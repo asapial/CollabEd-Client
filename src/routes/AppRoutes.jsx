@@ -24,6 +24,7 @@ import AllSessions from "../pages/StudySessions/AllSessions";
 import SessionDetails from "../pages/StudySessions/SessionDetails";
 import PrivateRoute from "../RouteProtector/PrivateRoute";
 import AllTutors from "../pages/Tutors/AllTutors";
+import Payment from "../pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
           path:"tutors",
           Component: AllTutors
+      },
+      {
+          path:"/payment/:id",
+          Component: Payment
       }
     ],
   },
