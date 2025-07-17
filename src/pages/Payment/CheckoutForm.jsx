@@ -5,11 +5,12 @@ import useFetchApi from "../../Api/useFetchApi";
 import { FaLock } from "react-icons/fa";
 import axios from "axios";
 import { AuthContext } from "../../main";
+import { SuccessToast } from "../../utils/ToastMaker";
 
 const CheckoutForm = ({ id }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const { getSessionById } = useFetchApi();
+  const { getSessionById,bookSession } = useFetchApi();
   const { user } = useContext(AuthContext);
 
   const { data: session } = useQuery({
@@ -56,6 +57,20 @@ const CheckoutForm = ({ id }) => {
         },
       }
     );
+
+    if(paymentIntent.status === "succeeded") {
+        SuccessToast("Payment successful!");
+              bookSession({
+                studentEmail: user.email,
+                tutorEmail: session.tutorEmail,
+                sessionId: session._id,
+                sessionTitle: session.title,
+              }).then((data) => {
+                if (data.acknowledged) {
+                  SuccessToast("Session booked successfully!");
+                }
+              });
+    }
 
     if (confirmError) {
       console.log("Payment failed:", confirmError.message);
