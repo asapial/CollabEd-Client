@@ -9,6 +9,7 @@ import {
   FaStar,
   FaPaperPlane,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { AuthContext } from "../../main";
 import useFetchApi from "../../Api/useFetchApi";
 import SectionContainer from "../../components/SectionContainer/SectionContainer";
@@ -85,111 +86,126 @@ const SessionDetails = () => {
   if (loadingSession) return <Loading />;
 
   return (
-    <SectionContainer className="bg-base-300 min-h-screen">
-      <div className="card bg-base-100 shadow-xl">
-        <div className="card-body space-y-4">
-          <h2 className="text-3xl font-bold flex gap-2 items-center">
+    <SectionContainer className="bg-base-200 min-h-screen py-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="card bg-base-100 shadow-lg border border-base-300"
+      >
+        <div className="card-body space-y-6">
+          <h2 className="text-3xl font-bold flex gap-2 items-center text-primary">
             <FaBookOpen /> {session.title}
           </h2>
-          <p className="flex gap-2 items-center">
-            <FaUser /> Tutor: {session.tutorName}
-          </p>
-          <p className="flex gap-2 items-center">
-            <FaStar className="text-warning" /> Average Rating: 4.5 (mocked)
-          </p>
-          <p className="text-justify">{session.description}</p>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <p className="flex gap-2 items-center text-base-content">
+              <FaUser /> <span className="font-medium">Tutor:</span>{" "}
+              {session.tutorName}
+            </p>
+            <p className="flex gap-2 items-center">
+              <FaStar className="text-warning" />
+              <span className="font-medium">Average Rating:</span> 4.5 (mocked)
+            </p>
+          </div>
+
+          <p className="text-justify text-sm opacity-90">{session.description}</p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-5 text-sm">
             <p className="flex items-center gap-2">
-              <FaCalendarAlt /> Registration: {session.registrationStart} to{" "}
-              {session.registrationEnd}
+              <FaCalendarAlt /> <span className="font-medium">Registration:</span>{" "}
+              {session.registrationStart} → {session.registrationEnd}
             </p>
             <p className="flex items-center gap-2">
-              <FaCalendarAlt /> Class: {session.classStart} to{" "}
-              {session.classEnd}
+              <FaCalendarAlt /> <span className="font-medium">Class:</span>{" "}
+              {session.classStart} → {session.classEnd}
             </p>
             <p className="flex items-center gap-2">
-              <FaCalendarAlt /> Duration: {session.duration}
+              <FaCalendarAlt /> <span className="font-medium">Duration:</span>{" "}
+              {session.duration}
             </p>
             <p className="flex items-center gap-2">
-              <FaMoneyBillWave /> Fee:{" "}
+              <FaMoneyBillWave />
+              <span className="font-medium">Fee:</span>{" "}
               {parseFloat(session.registrationFee) > 0
                 ? `$${session.registrationFee}`
                 : "Free"}
-              {/* <FaMoneyBillWave /> Fee: {session.registrationFee} */}
             </p>
           </div>
 
-          <div className="mt-4">
+          <div className="pt-4">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary w-full sm:w-auto"
               onClick={handleBooking}
               disabled={!isRegistrationOpen}
             >
-              {isRegistrationOpen ? "Book Now" : "Registration Closed"}
+              {isRegistrationOpen ? "📅 Book Now" : "❌ Registration Closed"}
             </button>
           </div>
 
-          <div className="mt-10">
-            {/* ⭐ Review Input Form */}
+          {/* ⭐ Review Form */}
+          <div className="mt-8">
             <form onSubmit={handleReviewSubmit} className="space-y-4">
-              <h4 className="text-lg font-semibold">Leave a Review</h4>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Rating (1-5)</span>
-                </label>
-                <input
-                  type="number"
-                  min="1"
-                  max="5"
-                  className="input input-bordered"
-                  value={rating}
-                  onChange={(e) => setRating(Number(e.target.value))}
-                />
+              <h4 className="text-lg font-semibold">📝 Leave a Review</h4>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Rating (1–5)</span>
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="5"
+                    className="input input-bordered"
+                    value={rating}
+                    onChange={(e) => setRating(Number(e.target.value))}
+                  />
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Your Comment</span>
+                  </label>
+                  <textarea
+                    className="textarea textarea-bordered"
+                    rows="3"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Your Comment</span>
-                </label>
-                <textarea
-                  className="textarea textarea-bordered"
-                  rows="3"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                />
-              </div>
-
-              <button
-                className="btn btn-accent flex items-center gap-2"
-                type="submit"
-              >
+              <button className="btn btn-accent flex items-center gap-2 mt-2" type="submit">
                 <FaPaperPlane /> Submit Review
               </button>
             </form>
+          </div>
 
-            <h3 className="text-xl font-bold mb-4">Student Reviews</h3>
+          {/* 💬 Reviews */}
+          <div className="mt-10">
+            <h3 className="text-xl font-bold mb-4">💬 Student Reviews</h3>
             {reviews.length === 0 ? (
-              <p>No reviews available.</p>
+              <p className="opacity-70">No reviews yet.</p>
             ) : (
-              <div className="space-y-4 mb-6">
-                {reviews.map((review) => {
-                  if (review.review || review.rating) {
-                    return (
-                      <div key={review._id} className="p-4 border rounded-md">
-                        <p className="font-semibold">{review.studentEmail}</p>
-                        <p className="text-sm">Rating: {review.rating} / 5</p>
-                        <p>{review.review}</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
+              <div className="space-y-4">
+                {reviews.map((review) => (
+                  review.review || review.rating ? (
+                    <div
+                      key={review._id}
+                      className="p-4 border border-base-300 rounded-lg bg-base-100"
+                    >
+                      <p className="font-semibold text-sm">{review.studentEmail}</p>
+                      <p className="text-sm text-warning">Rating: {review.rating} / 5</p>
+                      <p className="text-sm opacity-90">{review.review}</p>
+                    </div>
+                  ) : null
+                ))}
               </div>
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
     </SectionContainer>
   );
 };
