@@ -118,6 +118,10 @@ const fetchTutors=()=>{
   return axiosSecure.get(`/allTutors`).then((res) => res.data);
 }
 
+const getStudentMaterials = (email) => {
+  return axiosSecure.get(`/studentMaterials?email=${email}`).then((res) => res.data);
+};
+
 
 
 
@@ -150,7 +154,8 @@ bookSession,
 getMyBookedSessions,
 postReview,
 getSessionReviews,
-fetchTutors
+fetchTutors,
+getStudentMaterials
 
 
   };

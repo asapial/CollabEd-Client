@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   const list = (
-    <>
+    < >
       {" "}
       <li>
         <Link to={"/tutors"}>Tutor</Link>
@@ -76,12 +76,12 @@ const Navbar = () => {
               {list}
             </ul>
           </div>
-          <Link className="text-xl">
+          <Link className="text-2xl">
             <CollabEdNamePlate></CollabEdNamePlate>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{list}</ul>
+          <ul className="menu menu-horizontal px-1 text-xl">{list}</ul>
         </div>
         <div className="navbar-end flex justify-center items-center gap-5">
           <button className="btn btn-primary rounded-2xl">
