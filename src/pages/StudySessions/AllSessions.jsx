@@ -4,6 +4,7 @@ import { FaCalendarAlt, FaClock, FaInfoCircle } from "react-icons/fa";
 import useFetchApi from "../../Api/useFetchApi";
 import SectionContainer from "../../components/SectionContainer/SectionContainer";
 import { Link } from "react-router";
+import Loading from "../Others/Loading";
 
 const AllSessions = () => {
   const { getAllSessions } = useFetchApi();
@@ -25,7 +26,7 @@ const AllSessions = () => {
       <h2 className="text-3xl font-bold text-center mb-8">All Study Sessions</h2>
 
       {isLoading ? (
-        <p className="text-center">Loading sessions...</p>
+        <Loading></Loading>
       ) : sessions.length === 0 ? (
         <p className="text-center">No sessions available.</p>
       ) : (

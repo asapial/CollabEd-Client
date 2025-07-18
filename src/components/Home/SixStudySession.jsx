@@ -1,8 +1,15 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaBookOpen, FaClock, FaCalendarAlt, FaInfoCircle } from "react-icons/fa";
+import {
+  FaBookOpen,
+  FaClock,
+  FaCalendarAlt,
+  FaInfoCircle,
+} from "react-icons/fa";
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 import useFetchApi from "../../Api/useFetchApi";
+import Loading from "../../pages/Others/Loading";
 
 const SixStudySession = () => {
   const { getSixSessions } = useFetchApi();
@@ -27,37 +34,71 @@ const SixStudySession = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center mb-10 flex items-center justify-center gap-2">
-        <FaBookOpen className="text-primary" />
+    <section className="max-w-7xl mx-auto px-4 py-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+        <FaBookOpen className="text-primary text-2xl" />
         Available Study Sessions
       </h2>
 
       {isLoading ? (
-        <p className="text-center">Loading sessions...</p>
+        <Loading />
       ) : approvedSessions.length === 0 ? (
-        <p className="text-center">No approved sessions found.</p>
+        <p className="text-center text-lg">No approved sessions found.</p>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {approvedSessions.map((session) => {
-            const status = getSessionStatus(session.registrationStart, session.registrationEnd);
+            const status = getSessionStatus(
+              session.registrationStart,
+              session.registrationEnd
+            );
+
             return (
-              <div key={session._id} className="card bg-base-100 shadow-md border">
+              <motion.div
+                key={session._id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5 }}
+                className="card bg-base-100 shadow-primary shadow-sm hover:shadow-lg transition-shadow border border-base-300"
+              >
                 <div className="card-body space-y-3">
-                  <h3 className="text-xl font-bold flex items-center gap-2">
+                  <h3 className="text-xl font-semibold flex items-center gap-2">
                     <FaBookOpen className="text-primary" />
                     {session.title}
                   </h3>
-                  <p className="line-clamp-4 text-sm">{session.description}</p>
+
+                  <p className="line-clamp-4 text-sm opacity-80">{session.description}</p>
 
                   <div className="flex items-center gap-2 text-sm">
                     <FaCalendarAlt className="text-secondary" />
-                    Reg: {session.registrationStart} to {session.registrationEnd}
+                    <span>
+                      Reg:{" "}
+                      <span className="font-medium">
+                        {session.registrationStart}
+                      </span>{" "}
+                      to{" "}
+                      <span className="font-medium">
+                        {session.registrationEnd}
+                      </span>
+                    </span>
                   </div>
 
                   <div className="flex items-center gap-2 text-sm">
                     <FaClock className="text-secondary" />
-                    Status:
+                    Status:{" "}
                     <span
                       className={`badge badge-outline ${
                         status === "Ongoing" ? "badge-success" : "badge-error"
@@ -67,19 +108,22 @@ const SixStudySession = () => {
                     </span>
                   </div>
 
-                  <div className="card-actions justify-end mt-3">
-                    <Link to={`/session-details/${session._id}`} className="btn btn-sm btn-primary">
-                      <FaInfoCircle className="mr-1" />
+                  <div className="card-actions justify-end pt-4">
+                    <Link
+                      to={`/sessionDetails/${session._id}`}
+                      className="btn btn-sm btn-primary gap-2"
+                    >
+                      <FaInfoCircle />
                       Read More
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       )}
-    </div>
+    </section>
   );
 };
 

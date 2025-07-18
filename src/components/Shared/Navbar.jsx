@@ -1,12 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CollabEdNamePlate from "../NamePlate/CollabEdNamePlate";
 import { Link } from "react-router";
 import { AuthContext } from "../../main";
 import SectionContainer from "../SectionContainer/SectionContainer";
+import { CgProfile } from "react-icons/cg";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 const Navbar = () => {
+  
   const { user } = useContext(AuthContext);
+    const [theme, setTheme] = useState(true);
   console.log(user);
+
+    const toggleTheme = () => {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute("data-theme");
+    html.setAttribute(
+      "data-theme",
+      currentTheme === "CollabEdLight" ? "CollabEdDark" : "CollabEdLight"
+    );
+  };
+
   const list = (
     <>
       {" "}
@@ -17,18 +31,20 @@ const Navbar = () => {
         <Link to={"/allSessions"}>Study sessions</Link>
       </li>
       {user?.userRole === "Tutor" && (
-              <li>
-        <Link to={"/tutorDashboard"}>Dashboard</Link>
-      </li>)}
+        <li>
+          <Link to={"/tutorDashboard"}>Dashboard</Link>
+        </li>
+      )}
       {user?.userRole === "Admin" && (
-              <li>
-        <Link to={"/adminDashboard"}>Dashboard</Link>
-      </li>)}
+        <li>
+          <Link to={"/adminDashboard"}>Dashboard</Link>
+        </li>
+      )}
       {user?.userRole === "Student" && (
-              <li>
-        <Link to={"/studentDashboard"}>Dashboard</Link>
-      </li>)}
-
+        <li>
+          <Link to={"/studentDashboard"}>Dashboard</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -67,21 +83,38 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{list}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end flex justify-center items-center gap-5">
           <button className="btn btn-primary rounded-2xl">
             <Link to={"/login"}>Login</Link>
           </button>
+                  <button
+          onClick={() => {
+            toggleTheme();
+          }}
+        >
+          {theme ? <FaSun size={30}></FaSun> : <FaMoon size={30}></FaMoon>}
+        </button>
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar mr-12 md:m-0"
           >
-            <div className="w-10 rounded-full">
-              <img src={user?.photoURL} />
-              {/* <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/profile/demo/batperson@192.webp"
-              /> */}
+            <div className="">
+              {user ? (
+                user.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName || "User Avatar"}
+                    className="w-10 h-10 rounded-full"
+                  />
+                ) : (
+                  <CgProfile />
+
+                )
+              ) : (
+                <CgProfile />
+
+              )}
             </div>
           </div>
         </div>
