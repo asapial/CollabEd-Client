@@ -7,6 +7,7 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import CollabEdNamePlate from "../NamePlate/CollabEdNamePlate";
 
 const Footer = () => {
   return (
@@ -14,7 +15,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand */}
         <div>
-          <h2 className="text-xl font-bold text-primary mb-3">CollabEd</h2>
+          <h2 className="text-xl font-bold text-primary mb-3"><CollabEdNamePlate></CollabEdNamePlate></h2>
           <p className="text-sm opacity-80">
             Your trusted collaborative education platform. Join study sessions,
             explore learning paths, and grow together.
