@@ -13,6 +13,7 @@ const Navbar = () => {
   console.log(user);
 
     const toggleTheme = () => {
+      setTheme(!theme)
     const html = document.documentElement;
     const currentTheme = html.getAttribute("data-theme");
     html.setAttribute(
@@ -92,7 +93,7 @@ const Navbar = () => {
             toggleTheme();
           }}
         >
-          {theme ? <FaSun size={30}></FaSun> : <FaMoon size={30}></FaMoon>}
+          {!theme ? <FaSun size={30}></FaSun> : <FaMoon size={30}></FaMoon>}
         </button>
           <div
             tabIndex={0}
@@ -108,11 +109,11 @@ const Navbar = () => {
                     className="w-10 h-10 rounded-full"
                   />
                 ) : (
-                  <CgProfile />
+                  <CgProfile size={30} />
 
                 )
               ) : (
-                <CgProfile />
+                <CgProfile size={30} />
 
               )}
             </div>
