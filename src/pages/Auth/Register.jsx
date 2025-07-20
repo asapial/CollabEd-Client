@@ -6,7 +6,7 @@ import {
   FaImage,
   FaEye,
   FaEyeSlash,
-} from "react-icons/fa"; 
+} from "react-icons/fa";
 import Lottie from "lottie-react";
 import registerAnim from "../../assets/Animation/registration.json";
 import { FcGoogle } from "react-icons/fc";
@@ -16,12 +16,15 @@ import { passwordValidator } from "../../utils/PasswordValidation";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import { ErrorToast, SuccessToast } from "../../utils/ToastMaker";
 import CollabEdNamePlate from "../../components/NamePlate/CollabEdNamePlate";
+import useFetchApi from "../../Api/useFetchApi";
+import {  handleInsertDataRegister } from "../../utils/insertData";
 
 const Register = () => {
-  const { createUser, loginWithGoogle } = useContext(AuthContext);
+  const { createUser, loginWithGoogle,mongoLoading, setMongoLoading } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false); // State for password visibility
   const [errorMassage, setErrorMassage] = useState("");
   const navigate = useNavigate();
+  const { findTheUser, postTheUser } = useFetchApi();
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -38,11 +41,12 @@ const Register = () => {
     if (!passwordValidator(password, setErrorMassage)) return;
 
     createUser(email, password, name, photoURL)
-      .then(() => {
-        // Registration successful, show success message or redirect
+      .then((data) => {
+        console.log(data);
+
+        handleInsertDataRegister(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
         SuccessToast("Registration Successful");
         navigate("/");
-
       })
       .catch((error) => {
         ErrorToast(`Error Occurred: ${error.message}`);
@@ -51,8 +55,9 @@ const Register = () => {
 
   const handleRegisterWithGmail = () => {
     loginWithGoogle()
-      .then(() => {
+      .then((data) => {
         // Registration successful, show success message or redirect
+        handleInsertDataRegister(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
         SuccessToast("Registration Successful");
       })
       .catch((error) => {

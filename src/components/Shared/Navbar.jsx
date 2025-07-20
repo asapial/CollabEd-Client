@@ -7,13 +7,17 @@ import { CgProfile } from "react-icons/cg";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const Navbar = () => {
-  
-  const { user } = useContext(AuthContext);
-    const [theme, setTheme] = useState(true);
+  const { user ,signOutUser} = useContext(AuthContext);
+  const [theme, setTheme] = useState(true);
   console.log(user);
+      const handleSignOut = () => {
+    signOutUser().then(() => {
+      navigate("/");
+    });
+  };
 
-    const toggleTheme = () => {
-      setTheme(!theme)
+  const toggleTheme = () => {
+    setTheme(!theme);
     const html = document.documentElement;
     const currentTheme = html.getAttribute("data-theme");
     html.setAttribute(
@@ -23,7 +27,7 @@ const Navbar = () => {
   };
 
   const list = (
-    < >
+    <>
       {" "}
       <li>
         <Link to={"/tutors"}>Tutor</Link>
@@ -85,16 +89,26 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 text-xl">{list}</ul>
         </div>
         <div className="navbar-end flex justify-center items-center gap-5">
-          <button className="btn btn-primary rounded-2xl">
-            <Link to={"/login"}>Login</Link>
-          </button>
                   <button
-          onClick={() => {
-            toggleTheme();
-          }}
-        >
-          {!theme ? <FaSun size={30}></FaSun> : <FaMoon size={30}></FaMoon>}
-        </button>
+            onClick={() => {
+              toggleTheme();
+            }}
+          >
+            {!theme ? <FaSun size={30}></FaSun> : <FaMoon size={30}></FaMoon>}
+          </button>
+          {!user &&           <button className="btn btn-primary rounded-2xl">
+            <Link to={"/login"}>Login</Link>
+          </button>}
+
+            {!user &&           <button className="btn btn-primary rounded-2xl">
+            <Link to={"/register"}>Register</Link>
+          </button> }
+{user && (
+  <button onClick={handleSignOut} className="btn btn-primary rounded-2xl">
+    Logout
+  </button>
+)}
+
           <div
             tabIndex={0}
             role="button"
@@ -110,11 +124,9 @@ const Navbar = () => {
                   />
                 ) : (
                   <CgProfile size={30} />
-
                 )
               ) : (
                 <CgProfile size={30} />
-
               )}
             </div>
           </div>

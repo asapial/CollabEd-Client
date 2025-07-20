@@ -12,6 +12,7 @@ const AuthProvider = ({children}) => {
   const [loading, setLoading] = useState(true);
   const [authActionCount, setAuthActionCount] = useState(0); // Triggers useEffect
   const provider = new GoogleAuthProvider();
+  const [mongoLoading, setMongoLoading] = useState(true);
 
   const createUser = (email, password, name, photoURL) => {
     setLoading(true);
@@ -101,7 +102,7 @@ useEffect(() => {
   });
 
   return () => unsubscribe();
-}, [authActionCount]);
+}, [authActionCount,mongoLoading]);
 
 
 
@@ -117,7 +118,9 @@ useEffect(() => {
     user,
     loading,
     loginWithGoogle,
-    resetEmail
+    resetEmail,
+    mongoLoading,
+    setMongoLoading
   };
   return (
     <AuthContext.Provider value={userData}>{children}</AuthContext.Provider>

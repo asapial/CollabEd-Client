@@ -10,15 +10,16 @@ import { AuthContext } from "../../main";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import CollabEdNamePlate from "../../components/NamePlate/CollabEdNamePlate";
 import useFetchApi from "../../Api/useFetchApi";
+import {  handleInsertDataLogin } from "../../utils/insertData";
 
 const Login = () => {
   const location = useLocation();
-  const { loginUser, loginWithGoogle } = useContext(AuthContext);
+  const { loginUser, loginWithGoogle,     mongoLoading, setMongoLoading } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [previousUser,setPreviousUser]=useState(false);
+  // const [previousUser, setPreviousUser] = useState(false);
   const navigate = useNavigate();
   // const location=useLocation();
-  const {findTheUser,postTheUser}=useFetchApi();
+  const { findTheUser, postTheUser } = useFetchApi();
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -27,7 +28,9 @@ const Login = () => {
     const password = form.password.value;
 
     loginUser(email, password)
-      .then(() => {
+      .then((data) => {
+        console.log(data);
+        handleInsertDataLogin(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
         SuccessToast("Login Successful — Great to see you again!");
         navigate(`${location.state ? location.state : "/"}`);
       })
@@ -36,33 +39,17 @@ const Login = () => {
       });
   };
 
-const handleLoginWithGmail = () => {
-  loginWithGoogle()
-    .then((data) => {
-      const email = data.user.email;
-      const userInfo = {
-        email: data.user.email,
-        userUid: data.user.uid,
-        userRole: "Student",
-        image: data.user.photoURL,
-        userName: data.user.displayName,
-      };
-
-      findTheUser(email).then((foundUser) => {
-        console.log("Found user:", foundUser);
-
-        if (!foundUser) {
-          postTheUser(email, userInfo);
-        }
-
+  const handleLoginWithGmail = () => {
+    loginWithGoogle()
+      .then((data) => {
+        handleInsertDataLogin(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
         SuccessToast("Login Successful — Great to see you again!");
         navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        ErrorToast(`Error Occurred: ${error.message}`);
       });
-    })
-    .catch((error) => {
-      ErrorToast(`Error Occurred: ${error.message}`);
-    });
-};
+  };
 
   return (
     <section className="min-h-screen custom-gradient flex items-center justify-center px-4 py-10">
@@ -143,8 +130,8 @@ const handleLoginWithGmail = () => {
           <button
             onClick={handleLoginWithGmail}
             type="button"
-            className="w-full flex items-center justify-center gap-3 py-3  bg-base-200 rounded-xl shadow-sm 
-             hover:bg-base-100 transition duration-300 ease-in-out text-neutral font-medium"
+            className="w-full flex items-center justify-center gap-3 py-3  bg-base-300 rounded-xl shadow-sm 
+             hover:border-primary transition duration-300 ease-in-out text-neutral font-medium"
           >
             <FcGoogle className="text-xl" />
             Sign in with Google
