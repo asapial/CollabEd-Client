@@ -8,12 +8,19 @@ const ManageUsers = () => {
   const { getAllUsers, updateUserRole } = useFetchApi();
   const queryClient = useQueryClient();
 
-  const [searchText, setSearchText] = useState(""); // controlled input
+  const [searchText, setSearchText] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 10; // items per page
 
-  const { data: users = [], isLoading } = useQuery({
-    queryKey: ["users", searchText], // make it reactive
-    queryFn: () => getAllUsers(searchText),
+  const { data = {}, isLoading } = useQuery({
+    queryKey: ["users", searchText, currentPage],
+    queryFn: () => getAllUsers(searchText, currentPage, limit),
+    keepPreviousData: true,
   });
+
+  const users = data.users || [];
+  const total = data.total || 0;
+  const totalPages = Math.ceil(total / limit);
 
   const mutation = useMutation({
     mutationFn: ({ id, role }) => updateUserRole(id, role),
@@ -34,23 +41,16 @@ const ManageUsers = () => {
 
       {/* Search Bar */}
       <div className="mb-6 flex items-center gap-2 max-w-md mx-auto">
-        <div className="form-control w-full">
-          <div className="input-group">
-            <input
-              type="text"
-              placeholder="Search by name or email"
-              className="input input-bordered w-full"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            {/* <button
-              className="btn btn-square btn-primary"
-              onClick={() => queryClient.invalidateQueries(["users"])}
-            >
-              <FaSearch />
-            </button> */}
-          </div>
-        </div>
+        <input
+          type="text"
+          placeholder="Search by name or email"
+          className="input input-bordered w-full"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setCurrentPage(1); // reset to first page on new search
+          }}
+        />
       </div>
 
       {/* Users Table */}
@@ -81,9 +81,8 @@ const ManageUsers = () => {
             ) : (
               users.map((user, index) => (
                 <tr key={user._id}>
-                  <td>{index + 1}</td>
+                  <td>{(currentPage - 1) * limit + index + 1}</td>
                   <td>
-                    {" "}
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
@@ -95,7 +94,6 @@ const ManageUsers = () => {
                       </div>
                       <div>
                         <div className="font-bold">{user.userName}</div>
-                        
                       </div>
                     </div>
                   </td>
@@ -120,6 +118,23 @@ const ManageUsers = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center gap-2 mt-8">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+            <button
+              key={num}
+              onClick={() => setCurrentPage(num)}
+              className={`btn btn-sm ${
+                currentPage === num ? "btn-primary" : "btn-outline"
+              }`}
+            >
+              {num}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

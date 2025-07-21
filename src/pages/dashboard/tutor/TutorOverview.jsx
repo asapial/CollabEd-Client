@@ -16,6 +16,7 @@ import {
 } from "recharts";
 import { AuthContext } from "../../../main";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import Loading from "../../Others/Loading";
 
 // Simulated fetch function
 const fetchTutorOverview = async () => {
@@ -42,7 +43,7 @@ const TutorOverview = () => {
   });
 
   if (isLoading) {
-    return <div className="text-center text-lg font-semibold mt-10">Loading...</div>;
+    return <Loading></Loading>
   }
 
   return (
@@ -54,7 +55,7 @@ const TutorOverview = () => {
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div className="bg-base-100 shadow-lg rounded-xl p-6 flex items-center gap-5 hover:shadow-xl transition">
+        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
           <FaUsers className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Total Students</h3>
@@ -62,7 +63,7 @@ const TutorOverview = () => {
           </div>
         </div>
 
-        <div className="bg-base-100 shadow-lg rounded-xl p-6 flex items-center gap-5 hover:shadow-xl transition">
+        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
           <FaBook className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Courses Taught</h3>
@@ -70,7 +71,7 @@ const TutorOverview = () => {
           </div>
         </div>
 
-        <div className="bg-base-100 shadow-lg rounded-xl p-6 flex items-center gap-5 hover:shadow-xl transition">
+        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
           <FaCalendarCheck className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Upcoming Classes</h3>
@@ -80,7 +81,7 @@ const TutorOverview = () => {
       </div>
 
       {/* Performance Chart */}
-      <div className="bg-base-100 shadow-xl rounded-xl p-6">
+        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6  hover:shadow-lg transition duration-300">
         <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
           <FaChalkboardTeacher className="text-primary" />
           Course Performance Ratings

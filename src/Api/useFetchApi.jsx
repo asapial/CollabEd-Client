@@ -36,9 +36,12 @@ const useFetchApi = () => {
     return axiosSecure.get(`/getAllMaterials?tutorEmail=${email}`).then((res) => res.data); 
   }
 
-  const getAllUsers = (search) => {
-    return axiosSecure.get(`/getAllUsers?search=${search}`).then((res) => res.data);
-  };
+const getAllUsers = (search = "", page = 1, limit = 10) => {
+  return axiosSecure
+    .get(`/getAllUsers?search=${search}&page=${page}&limit=${limit}`)
+    .then((res) => res.data);
+};
+
 
   const updateUserRole = (id, role) => {
     return axiosSecure.patch(`/updateUserRole?id=${id}&role=${role}`).then((res) => res.data);
