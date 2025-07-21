@@ -140,6 +140,9 @@ return (
       </div>
 
       <div className="navbar-end flex justify-end items-center gap-2">
+        {user && (                  <button className="btn btn-primary rounded-2xl"  onClick={handleSignOut}>
+              Logout
+            </button>)}
         <button onClick={toggleTheme} className=" mr-5">
           {!theme ? <FaSun size={30} /> : <FaMoon size={30} />}
         </button>

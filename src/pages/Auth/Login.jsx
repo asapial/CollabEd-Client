@@ -53,7 +53,6 @@ const Login = () => {
 
   return (
     <section className="min-h-screen custom-gradient flex items-center justify-center px-4 py-10">
-      <title>PlayPulse | Login</title>
       <div className="bg-base-100  rounded-2xl w-full lg:max-w-5xl mx-auto lg:flex justify-center items-center border border-primary shadow-primary shadow ">
         <div className="w-full lg:w-2/5 h-[500px] flex justify-center items-center p-10">
           <Lottie animationData={login} loop={true} />

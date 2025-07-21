@@ -29,6 +29,10 @@ import UpdateProfile from "../pages/Auth/UpdateProfile";
 import StudentOverview from "../pages/dashboard/student/StudentOverview";
 import TutorOverview from "../pages/dashboard/tutor/TutorOverview";
 import AdminOverview from "../pages/dashboard/admin/AdminOverview";
+import FAQ from "../pages/Others/FAQ";
+import Contact from "../pages/Others/Contact";
+import Privacy from "../pages/Others/Privacy";
+import TermsAndConditions from "../pages/Others/TermsAndConditions";
 
 const router = createBrowserRouter([
   {
@@ -47,10 +51,10 @@ const router = createBrowserRouter([
         path: "register",
         Component: Register,
       },
-      // {
-          // path:"resetLink",
-          // Component: ResetLink
-      // }
+      {
+          path:"resetLink",
+          Component: ResetLink
+      },
       {
           path:"allSessions",
           Component: AllSessions
@@ -66,6 +70,22 @@ const router = createBrowserRouter([
       {
           path:"/payment/:id",
           Component: Payment
+      },
+      {
+          path:"faq",
+          Component: FAQ
+      },
+      {
+          path:"contact",
+          Component: Contact
+      },
+      {
+          path:"privacy",
+          Component: Privacy
+      },
+      {
+          path:"terms",
+          Component: TermsAndConditions
       }
     ],
   },

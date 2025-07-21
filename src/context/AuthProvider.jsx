@@ -78,7 +78,7 @@ useEffect(() => {
     if (userData) {
       try {
         const dbUser = await axios
-          .get(`http://localhost:3000/searchTheUser?email=${userData.email}`)
+          .get(`https://collab-ed-server.vercel.app/searchTheUser?email=${userData.email}`)
           .then((res) => res.data);
 
         console.log("MongoDB user data:", dbUser);

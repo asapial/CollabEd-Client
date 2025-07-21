@@ -41,7 +41,7 @@ const CheckoutForm = ({ id }) => {
       return;
     }
 
-    const res = await axios.post("http://localhost:3000/create-payment-intent", {
+    const res = await axios.post("https://collab-ed-server.vercel.app/create-payment-intent", {
       amount: parseInt(session?.registrationFee),
     });
 

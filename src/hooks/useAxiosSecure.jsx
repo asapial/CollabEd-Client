@@ -4,7 +4,7 @@ import { AuthContext } from '../main';
 
 
 const AxiosInstance=axios.create({
-    baseURL:'http://localhost:3000'
+    baseURL:'https://collab-ed-server.vercel.app'
 })
 const useAxiosSecure = () => {
 
