@@ -21,7 +21,13 @@ const SessionDetails = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
-  const { getSessionById, getSessionReviews, bookSession, postReview,checkBooked } = useFetchApi();
+  const {
+    getSessionById,
+    getSessionReviews,
+    bookSession,
+    postReview,
+    checkBooked,
+  } = useFetchApi();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
 
@@ -112,11 +118,14 @@ const SessionDetails = () => {
             </p>
           </div>
 
-          <p className="text-justify text-sm opacity-90">{session.description}</p>
+          <p className="text-justify text-sm opacity-90">
+            {session.description}
+          </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-5 text-sm">
             <p className="flex items-center gap-2">
-              <FaCalendarAlt /> <span className="font-medium">Registration:</span>{" "}
+              <FaCalendarAlt />{" "}
+              <span className="font-medium">Registration:</span>{" "}
               {session.registrationStart} → {session.registrationEnd}
             </p>
             <p className="flex items-center gap-2">
@@ -137,9 +146,11 @@ const SessionDetails = () => {
           </div>
 
           <div className="pt-4">
-<button
+            <button
               onClick={handleBooking}
-              disabled={!isRegistrationOpen || isBooked || user?.userRole !== "Student"}
+              disabled={
+                !isRegistrationOpen || isBooked || user?.userRole !== "Student"
+              }
               className={`btn w-full sm:w-auto ${
                 isBooked
                   ? "btn-outline btn-disabled text-gray-400"
@@ -189,7 +200,10 @@ const SessionDetails = () => {
                 </div>
               </div>
 
-              <button className="btn btn-accent flex items-center gap-2 mt-2" type="submit">
+              <button
+                className="btn btn-accent flex items-center gap-2 mt-2"
+                type="submit"
+              >
                 <FaPaperPlane /> Submit Review
               </button>
             </form>
@@ -202,18 +216,22 @@ const SessionDetails = () => {
               <p className="opacity-70">No reviews yet.</p>
             ) : (
               <div className="space-y-4">
-                {reviews.map((review) => (
+                {reviews.map((review) =>
                   review.review || review.rating ? (
                     <div
                       key={review._id}
                       className="p-4 border border-base-300 rounded-lg bg-base-100"
                     >
-                      <p className="font-semibold text-sm">{review.studentEmail}</p>
-                      <p className="text-sm text-warning">Rating: {review.rating} / 5</p>
+                      <p className="font-semibold text-sm">
+                        {review.studentEmail}
+                      </p>
+                      <p className="text-sm text-warning">
+                        Rating: {review.rating} / 5
+                      </p>
                       <p className="text-sm opacity-90">{review.review}</p>
                     </div>
                   ) : null
-                ))}
+                )}
               </div>
             )}
           </div>

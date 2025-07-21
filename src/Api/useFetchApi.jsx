@@ -98,8 +98,10 @@ const getSixSessions = () => {
   return axiosSecure.get("/getSixSessions").then((res) => res.data);
 };
 
-const getAllSessionsGeneral = () => {
-  return axiosSecure.get("/getAllSessionsGeneral").then((res) => res.data);
+const getAllSessionsGeneral = (page = 1, limit = 6) => {
+  return axiosSecure
+    .get(`/getAllSessionsGeneral?page=${page}&limit=${limit}`)
+    .then((res) => res.data);
 };
 
 const getSessionById = (id) => {
@@ -129,7 +131,7 @@ const getStudentMaterials = (email) => {
 };
 
 const checkBooked = (email, sessionId) => {
-  return axiosSecure.get(`/checkBooked?email=${email}&sessionId=${sessionId}`).then((res) => res.data);
+  return axiosSecure.get(`/checkedBooked?email=${email}&sessionId=${sessionId}`).then((res) => res.data);
 };
 
 
@@ -172,3 +174,5 @@ checkBooked
 };
 
 export default useFetchApi;
+
+

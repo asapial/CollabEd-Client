@@ -10,6 +10,7 @@ import {
 import useFetchApi from "../../../Api/useFetchApi";
 import { ErrorToast, SuccessToast } from "../../../utils/ToastMaker";
 import { Link } from "react-router";
+import Loading from "../../Others/Loading";
 // import { toast } from "react-hot-toast";
 
 const MySession = () => {
@@ -52,7 +53,7 @@ const MySession = () => {
   console.log("My Sessions:", sessions);
 
   if (isLoading) {
-    return <div className="text-center text-lg">Loading sessions...</div>;
+    return <Loading></Loading>
   }
 
   return (
@@ -61,61 +62,79 @@ const MySession = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {sessions.map((session) => (
-          <div
-            key={session._id}
-            className="card bg-base-100 shadow-md border border-base-300 hover:shadow-lg transition-all duration-300"
-          >
-            <div className="card-body space-y-4">
-              {/* Title */}
-              <h3 className="card-title text-lg md:text-xl font-semibold">
-                <FaCheckCircle className="text-primary" />
-                <span>{session.title}</span>
-              </h3>
+<div
+  key={session._id}
+  className="card bg-base-100 shadow-md border border-base-300 hover:shadow-lg transition-all duration-300"
+>
+  <div className="card-body space-y-4">
+    {/* Title */}
+    <h3 className="card-title text-lg md:text-xl font-semibold">
+      <FaCheckCircle className="text-primary" />
+      <span>{session.title}</span>
+    </h3>
 
-              {/* Description */}
-              <p className="text-sm text-base-content/80 leading-relaxed">
-                {session.description?.slice(0, 120)}...
-              </p>
+    {/* Description */}
+    <p className="text-sm text-base-content/80 leading-relaxed">
+      {session.description?.slice(0, 120)}...
+    </p>
 
-              {/* Status */}
-              <div className="text-sm font-medium flex items-center gap-2">
-                <span className="text-base-content/70">Status:</span>
-                <span
-                  className={`badge px-3 py-1 text-sm capitalize ${
-                    session.status === "approved"
-                      ? "badge-success"
-                      : session.status === "rejected"
-                      ? "badge-error"
-                      : "badge-warning"
-                  } flex items-center gap-1`}
-                >
-                  {session.status === "approved" && <FaCheckCircle />}
-                  {session.status === "rejected" && <FaTimesCircle />}
-                  {session.status === "pending" && <FaClock />}
-                  {session.status}
-                </span>
-              </div>
+    {/* Status Badge */}
+    <div className="text-sm font-medium flex items-center gap-2">
+      <span className="text-base-content/70">Status:</span>
+      <span
+        className={`badge px-3 py-1 text-sm capitalize ${
+          session.status === "approved"
+            ? "badge-success"
+            : session.status === "rejected"
+            ? "badge-error"
+            : "badge-warning"
+        } flex items-center gap-1`}
+      >
+        {session.status === "approved" && <FaCheckCircle />}
+        {session.status === "rejected" && <FaTimesCircle />}
+        {session.status === "pending" && <FaClock />}
+        {session.status}
+      </span>
+    </div>
 
-              {/* Resend Request */}
-              {session.status === "rejected" && (
-                <button
-                  onClick={() => handleResendRequest(session._id)}
-                  className="btn btn-sm btn-outline btn-warning flex items-center gap-2 w-fit mt-2"
-                >
-                  <FaSyncAlt className="text-warning" />
-                  Resend Approval Request
-                </button>
-              )}
-              {session.status === "approved" && (
-                <Link to={`/tutorDashboard/uploadMaterials/${session._id}`}>
-                  <button className="btn btn-sm btn-outline btn-warning flex items-center gap-2 w-fit mt-2">
-                    <FaSyncAlt className="text-warning" />
-                    Upload Materials
-                  </button>
-                </Link>
-              )}
-            </div>
+    {/* Rejection Reason + Feedback */}
+    {session.status === "rejected" && (
+      <div className="bg-error/10 border border-error/20 rounded-lg p-4 space-y-2 text-sm text-error">
+        {session.rejectionReason && (
+          <div>
+            <strong>Reason:</strong> {session.rejectionReason}
           </div>
+        )}
+        {session.rejectionFeedback && (
+          <div>
+            <strong>Feedback:</strong> {session.rejectionFeedback}
+          </div>
+        )}
+      </div>
+    )}
+
+    {/* Resend Request or Upload Materials */}
+    <div className="flex flex-wrap gap-2 mt-2">
+      {session.status === "rejected" && (
+        <button
+          onClick={() => handleResendRequest(session._id)}
+          className="btn btn-sm btn-outline btn-warning flex items-center gap-2"
+        >
+          <FaSyncAlt className="text-warning" />
+          Resend Approval Request
+        </button>
+      )}
+      {session.status === "approved" && (
+        <Link to={`/tutorDashboard/uploadMaterials/${session._id}`}>
+          <button className="btn btn-sm btn-outline btn-primary flex items-center gap-2">
+            Upload Materials
+          </button>
+        </Link>
+      )}
+    </div>
+  </div>
+</div>
+
         ))}
       </div>
     </div>

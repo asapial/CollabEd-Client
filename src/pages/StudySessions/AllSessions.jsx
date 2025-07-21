@@ -7,13 +7,13 @@ import Loading from "../Others/Loading";
 import { Link } from "react-router";
 
 const AllSessions = () => {
-  const { getAllSessions } = useFetchApi();
+  const { getAllSessionsGeneral } = useFetchApi();
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(6);
 
   const { data, isLoading } = useQuery({
     queryKey: ["allApprovedSessions", currentPage, cardsPerPage],
-    queryFn: () => getAllSessions(currentPage, cardsPerPage),
+    queryFn: () => getAllSessionsGeneral(currentPage, cardsPerPage),
     keepPreviousData: true,
   });
 
