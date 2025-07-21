@@ -22,7 +22,7 @@ const ManageNotes = () => {
   });
 
   const handleDelete = (id) => {
-    deleteNote(id)
+    deleteNote(id,user.email)
       .then(() => {
         SuccessToast("Note deleted");
         queryClient.invalidateQueries(["myNotes"]);
@@ -41,7 +41,7 @@ const ManageNotes = () => {
     updateNote(selectedNote._id, {
       title: updatedTitle,
       description: updatedDescription,
-    })
+    },user.email)
       .then(() => {
         SuccessToast("Note updated");
         queryClient.invalidateQueries(["myNotes"]);

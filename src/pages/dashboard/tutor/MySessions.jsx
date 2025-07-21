@@ -33,7 +33,7 @@ const MySession = () => {
   // 🔁 Resend approval request (change status to "pending")
 
   const handleResendRequest = (id) => {
-    resendApprovalRequest(id)
+    resendApprovalRequest(id,user.email)
       .then((res) => {
         console.log("Resend Request Response:", res);
         if (res.modifiedCount > 0) {

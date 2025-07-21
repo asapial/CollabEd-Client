@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaUserEdit, FaSearch } from "react-icons/fa";
 import useFetchApi from "../../../Api/useFetchApi";
 import { SuccessToast, ErrorToast } from "../../../utils/ToastMaker";
+import { AuthContext } from "../../../main";
 
 const ManageUsers = () => {
   const { getAllUsers, updateUserRole } = useFetchApi();
   const queryClient = useQueryClient();
+  const {user} = useContext(AuthContext);
 
   const [searchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +16,7 @@ const ManageUsers = () => {
 
   const { data = {}, isLoading } = useQuery({
     queryKey: ["users", searchText, currentPage],
-    queryFn: () => getAllUsers(searchText, currentPage, limit),
+    queryFn: () => getAllUsers(searchText, currentPage, limit,user.email),
     keepPreviousData: true,
   });
 
@@ -23,7 +25,7 @@ const ManageUsers = () => {
   const totalPages = Math.ceil(total / limit);
 
   const mutation = useMutation({
-    mutationFn: ({ id, role }) => updateUserRole(id, role),
+    mutationFn: ({ id, role }) => updateUserRole(id, role,user.email),
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
       SuccessToast("Role updated successfully");

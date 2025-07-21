@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaTrashAlt } from "react-icons/fa";
 import useFetchApi from "../../../Api/useFetchApi";
 import { SuccessToast, ErrorToast } from "../../../utils/ToastMaker";
+import { AuthContext } from "../../../main";
 
 const ManageMaterials = () => {
   const queryClient = useQueryClient();
   const { getAllMaterialsAdmin, deleteMaterial } = useFetchApi();
+  const {user}=useContext(AuthContext);
 
   // Fetch all materials
   const { data: materials = [], isLoading } = useQuery({
     queryKey: ["materials"],
-    queryFn:()=> getAllMaterialsAdmin(),
+    queryFn:()=> getAllMaterialsAdmin(user.email),
   });
 
   // Mutation for delete
   const mutation = useMutation({
-    mutationFn: (id) => deleteMaterial(id),
+    mutationFn: (id) => deleteMaterial(id,user.email),
     onSuccess: () => {
       queryClient.invalidateQueries(["materials"]);
       SuccessToast("Material removed successfully");

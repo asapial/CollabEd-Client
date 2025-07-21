@@ -52,14 +52,8 @@ const UploadMaterials = () => {
         image: imageUrl,
       };
 
-      // Send to your server
-      // await fetch("/api/upload-material", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(payload),
-      // });
 
-      uploadMaterials(payload).then(res=>{
+      uploadMaterials(payload,user.email).then(res=>{
         if(res.acknowledged){
           SuccessToast("Material uploaded successfully!");
         }

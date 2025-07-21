@@ -28,7 +28,7 @@ const UpdateNotes = () => {
   // Fetch the existing note data
   const { data: note, isLoading } = useQuery({
     queryKey: ["note", id],
-    queryFn: () => getNoteById(id),
+    queryFn: () => getNoteById(id,user.email),
     enabled: !!id,
   });
 
@@ -53,7 +53,7 @@ const UpdateNotes = () => {
   }, [quill]);
 
   const mutation = useMutation({
-    mutationFn: (updatedData) => updateNoteById(id, updatedData),
+    mutationFn: (updatedData) => updateNoteById(id, updatedData, user.email),
     onSuccess: (res) => {
         console.log(res);
         if(res.modifiedCount > 0) {

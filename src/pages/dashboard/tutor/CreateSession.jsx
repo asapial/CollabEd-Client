@@ -40,7 +40,7 @@ const CreateSession = () => {
 
   return (
     <div className="min-h-screen py-10 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-10 items-start gap-6 shadow-2xl  bg-base-100 p-8 rounded-2xl">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-10 items-start gap-6 shadow-primary shadow-sm  bg-base-100 p-8 rounded-2xl">
         {/* Lottie - 30% */}
         <div className="flex justify-center items-center md:col-span-3 h-full">
           <div className="">

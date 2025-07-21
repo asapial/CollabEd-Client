@@ -88,6 +88,7 @@ useEffect(() => {
           email: userData.email,
           displayName: userData.displayName,
           photoURL: userData.photoURL,
+          accessToken: userData.accessToken,
           ...dbUser,
         });
       } catch (err) {

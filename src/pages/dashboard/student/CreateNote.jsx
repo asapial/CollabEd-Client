@@ -34,7 +34,7 @@ const CreateNote = () => {
   }, [quill]);
 
   const mutation = useMutation({
-    mutationFn: (noteData) => createNote(noteData),
+    mutationFn: (noteData) => createNote(noteData,user.email),
     onSuccess: () => {
       SuccessToast("Note created successfully");
       queryClient.invalidateQueries(["notes"]);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useFetchApi from "../../../Api/useFetchApi";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
@@ -6,6 +6,7 @@ import "react-tabs/style/react-tabs.css";
 import { MdPendingActions, MdVerified } from "react-icons/md";
 import Loading from "../../Others/Loading";
 import { ErrorToast, SuccessToast } from "../../../utils/ToastMaker";
+import { AuthContext } from "../../../main";
 
 const ManageSessions = () => {
   const [showModal, setShowModal] = useState(false);
@@ -16,14 +17,17 @@ const ManageSessions = () => {
   const { getAllSessions, approveSession, rejectSession, deleteSession } =
     useFetchApi();
 
+  const {user}= useContext(AuthContext);
+
   const [showRejectModal, setShowRejectModal] = useState(false);
-const [rejectReason, setRejectReason] = useState("");
-const [rejectFeedback, setRejectFeedback] = useState("");
-const [rejectingSessionId, setRejectingSessionId] = useState(null);
+  const [rejectReason, setRejectReason] = useState("");
+  const [rejectFeedback, setRejectFeedback] = useState("");
+  const [rejectingSessionId, setRejectingSessionId] = useState(null);
 
   const { data: sessions = [], isLoading } = useQuery({
     queryKey: ["allSessions"],
-    queryFn: () => getAllSessions(),
+    queryFn: () => getAllSessions(user.email),
+
   });
 
   const pendingSessions = sessions.filter((s) => s.status === "pending");
@@ -39,7 +43,7 @@ const [rejectingSessionId, setRejectingSessionId] = useState(null);
       id: selectedSession._id,
       amount: isPaid ? amount : 0,
     };
-    approveSession(payload)
+    approveSession(payload,user.email)
       .then(() => {
         SuccessToast("Session approved");
         queryClient.invalidateQueries(["allSessions"]);
@@ -49,31 +53,30 @@ const [rejectingSessionId, setRejectingSessionId] = useState(null);
   };
 
   const handleReject = (id) => {
-  setRejectingSessionId(id);
-  setShowRejectModal(true);
-};
-
-const handleRejectSubmit = () => {
-  const payload = {
-    reason: rejectReason,
-    feedback: rejectFeedback,
+    setRejectingSessionId(id);
+    setShowRejectModal(true);
   };
 
-  rejectSession(rejectingSessionId, payload)
-    .then(() => {
-      SuccessToast("Session rejected with feedback");
-      queryClient.invalidateQueries(["allSessions"]);
-      setShowRejectModal(false);
-      setRejectFeedback("");
-      setRejectReason("");
-      setRejectingSessionId(null);
-    })
-    .catch(() => ErrorToast("Failed to reject session"));
-};
+  const handleRejectSubmit = () => {
+    const payload = {
+      reason: rejectReason,
+      feedback: rejectFeedback,
+    };
 
+    rejectSession(rejectingSessionId, payload, user.email)
+      .then(() => {
+        SuccessToast("Session rejected with feedback");
+        queryClient.invalidateQueries(["allSessions"]);
+        setShowRejectModal(false);
+        setRejectFeedback("");
+        setRejectReason("");
+        setRejectingSessionId(null);
+      })
+      .catch(() => ErrorToast("Failed to reject session"));
+  };
 
   const handleDelete = (id) => {
-    deleteSession(id)
+    deleteSession(id,user.email)
       .then(() => {
         SuccessToast("Session deleted");
         queryClient.invalidateQueries(["allSessions"]);
@@ -81,8 +84,8 @@ const handleRejectSubmit = () => {
       .catch(() => ErrorToast("Failed to delete"));
   };
 
-  if(isLoading) {
-    return <Loading></Loading>
+  if (isLoading) {
+    return <Loading></Loading>;
   }
 
   return (
@@ -224,83 +227,84 @@ const handleRejectSubmit = () => {
         </div>
       )}
 
-{showRejectModal && (
-  <div className="modal modal-open z-50">
-    <div className="modal-box rounded-xl border border-error shadow-lg bg-base-100 max-w-xl w-full">
-      <h3 className="text-xl font-bold text-error flex items-center gap-2">
-        <svg
-          className="w-6 h-6 text-error"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M18.364 5.636l-12.728 12.728m0-12.728l12.728 12.728"
-          />
-        </svg>
-        Reject Session
-      </h3>
+      {showRejectModal && (
+        <div className="modal modal-open z-50">
+          <div className="modal-box rounded-xl border border-error shadow-lg bg-base-100 max-w-xl w-full">
+            <h3 className="text-xl font-bold text-error flex items-center gap-2">
+              <svg
+                className="w-6 h-6 text-error"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M18.364 5.636l-12.728 12.728m0-12.728l12.728 12.728"
+                />
+              </svg>
+              Reject Session
+            </h3>
 
-      <p className="text-sm text-base-content/70 mb-4">
-        Please provide a reason and optional feedback for rejecting this session.
-      </p>
+            <p className="text-sm text-base-content/70 mb-4">
+              Please provide a reason and optional feedback for rejecting this
+              session.
+            </p>
 
-      {/* Rejection Reason */}
-      <div className="form-control w-full">
-        <label className="label font-medium">
-          <span className="label-text">Rejection Reason<span className="text-error">*</span></span>
-        </label>
-        <input
-          type="text"
-          className="input input-bordered input-error focus:outline-none focus:ring-2 focus:ring-error/50 transition"
-          value={rejectReason}
-          onChange={(e) => setRejectReason(e.target.value)}
-          placeholder="e.g., Incomplete session details"
-          required
-        />
-      </div>
+            {/* Rejection Reason */}
+            <div className="form-control w-full">
+              <label className="label font-medium">
+                <span className="label-text">
+                  Rejection Reason<span className="text-error">*</span>
+                </span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered input-error focus:outline-none focus:ring-2 focus:ring-error/50 transition"
+                value={rejectReason}
+                onChange={(e) => setRejectReason(e.target.value)}
+                placeholder="e.g., Incomplete session details"
+                required
+              />
+            </div>
 
-      {/* Feedback */}
-      <div className="form-control w-full mt-4">
-        <label className="label font-medium">
-          <span className="label-text">Feedback (optional)</span>
-        </label>
-        <textarea
-          className="textarea textarea-bordered focus:outline-none focus:ring-2 focus:ring-primary/40 transition min-h-[100px]"
-          value={rejectFeedback}
-          onChange={(e) => setRejectFeedback(e.target.value)}
-          placeholder="e.g., Please include more specific objectives for the session."
-        ></textarea>
-      </div>
+            {/* Feedback */}
+            <div className="form-control w-full mt-4">
+              <label className="label font-medium">
+                <span className="label-text">Feedback (optional)</span>
+              </label>
+              <textarea
+                className="textarea textarea-bordered focus:outline-none focus:ring-2 focus:ring-primary/40 transition min-h-[100px]"
+                value={rejectFeedback}
+                onChange={(e) => setRejectFeedback(e.target.value)}
+                placeholder="e.g., Please include more specific objectives for the session."
+              ></textarea>
+            </div>
 
-      {/* Actions */}
-      <div className="modal-action mt-6 flex justify-end gap-3">
-        <button
-          onClick={() => {
-            setShowRejectModal(false);
-            setRejectFeedback("");
-            setRejectReason("");
-            setRejectingSessionId(null);
-          }}
-          className="btn btn-ghost border border-base-300 hover:bg-base-200 transition-all"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleRejectSubmit}
-          className="btn btn-error shadow-md hover:shadow-xl transition-all duration-300"
-        >
-          Submit Rejection
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
+            {/* Actions */}
+            <div className="modal-action mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setShowRejectModal(false);
+                  setRejectFeedback("");
+                  setRejectReason("");
+                  setRejectingSessionId(null);
+                }}
+                className="btn btn-ghost border border-base-300 hover:bg-base-200 transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleRejectSubmit}
+                className="btn btn-error shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                Submit Rejection
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
