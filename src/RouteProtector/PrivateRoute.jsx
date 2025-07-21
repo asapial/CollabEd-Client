@@ -12,7 +12,7 @@ const PrivateRoute = ({ children, requiredRole }) => {
   if (loading) return <Loading />;
 
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to={'/login'} state={location.pathname}></Navigate>
   }
 
   // If role is required and doesn't match, redirect

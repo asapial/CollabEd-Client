@@ -61,7 +61,7 @@ const router = createBrowserRouter([
       },
       {
           path:"sessionDetails/:id",
-          Component: SessionDetails
+          element: <PrivateRoute><SessionDetails></SessionDetails></PrivateRoute>
       },
       {
           path:"tutors",

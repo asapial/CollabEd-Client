@@ -13,12 +13,11 @@ import useFetchApi from "../../Api/useFetchApi";
 import {  handleInsertDataLogin } from "../../utils/insertData";
 
 const Login = () => {
-  const location = useLocation();
   const { loginUser, loginWithGoogle,     mongoLoading, setMongoLoading } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   // const [previousUser, setPreviousUser] = useState(false);
   const navigate = useNavigate();
-  // const location=useLocation();
+  const location=useLocation();
   const { findTheUser, postTheUser } = useFetchApi();
   const handleLogin = (event) => {
     event.preventDefault();
@@ -32,7 +31,8 @@ const Login = () => {
         console.log(data);
         handleInsertDataLogin(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
         SuccessToast("Login Successful — Great to see you again!");
-        navigate(`${location.state ? location.state : "/"}`);
+
+            navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         ErrorToast(`Error Occurred: ${error.message}`);

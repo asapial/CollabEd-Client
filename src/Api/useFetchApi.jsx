@@ -59,7 +59,7 @@ const useFetchApi = () => {
 
   const updateUserRole = (id, role,email) => {
     return axiosSecure
-      .patch(`/updateUserRole?id=${id}&role=${role},email=${email}`)
+      .patch(`/updateUserRole?id=${id}&role=${role}&email=${email}`)
       .then((res) => res.data);
   };
 

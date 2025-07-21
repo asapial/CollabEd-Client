@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
 import { FaStickyNote, FaPen, FaSave } from "react-icons/fa";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../../../main";
@@ -15,36 +13,30 @@ const CreateNote = () => {
 
   const [description, setDescription] = useState("");
 
-  const { quill, quillRef } = useQuill();
-
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    reset,
   } = useForm();
 
-  // Listen for Quill content changes
-  React.useEffect(() => {
-    if (quill) {
-      quill.on("text-change", () => {
-        setDescription(quill.root.innerHTML);
-      });
-    }
-  }, [quill]);
-
   const mutation = useMutation({
-    mutationFn: (noteData) => createNote(noteData,user.email),
+    mutationFn: (noteData) => createNote(noteData, user.email),
     onSuccess: () => {
       SuccessToast("Note created successfully");
       queryClient.invalidateQueries(["notes"]);
-    //   reset();
-      if (quill) quill.setText(""); // clear editor
+      reset();
+      setDescription("");
     },
     onError: () => ErrorToast("Failed to create note"),
   });
 
   const onSubmit = (data) => {
+    if (!description.trim()) {
+      ErrorToast("Please enter a note description");
+      return;
+    }
+
     mutation.mutate({
       email: user?.email,
       title: data.title,
@@ -68,7 +60,7 @@ const CreateNote = () => {
               </label>
               <input
                 type="email"
-                value={user?.email}
+                value={user?.email || ""}
                 readOnly
                 className="input input-bordered bg-base-200"
               />
@@ -92,24 +84,27 @@ const CreateNote = () => {
               )}
             </div>
 
-            {/* Quill Editor */}
+            {/* Description */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Note Description</span>
               </label>
-              <div
-                ref={quillRef}
-                className="bg-base-100 border rounded-md min-h-[200px]"
-              />
+              <textarea
+                placeholder="Write your note description here..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="textarea textarea-bordered min-h-[150px]"
+              ></textarea>
             </div>
 
             {/* Submit Button */}
             <div className="form-control mt-4">
               <button
                 type="submit"
+                disabled={mutation.isLoading}
                 className="btn btn-primary flex items-center gap-2 justify-center"
               >
-                <FaSave /> Save Note
+                <FaSave /> {mutation.isLoading ? "Saving..." : "Save Note"}
               </button>
             </div>
           </form>

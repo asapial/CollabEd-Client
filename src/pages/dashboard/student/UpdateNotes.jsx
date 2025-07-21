@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
 import { FaStickyNote, FaPen, FaSave } from "react-icons/fa";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../../../main";
@@ -16,7 +14,6 @@ const UpdateNotes = () => {
   const queryClient = useQueryClient();
 
   const [description, setDescription] = useState("");
-  const { quill, quillRef } = useQuill();
 
   const {
     register,
@@ -28,49 +25,48 @@ const UpdateNotes = () => {
   // Fetch the existing note data
   const { data: note, isLoading } = useQuery({
     queryKey: ["note", id],
-    queryFn: () => getNoteById(id,user.email),
+    queryFn: () => getNoteById(id, user.email),
     enabled: !!id,
   });
 
-  // Set the form fields once data is loaded
+  // Set form fields and description when note is loaded
   useEffect(() => {
     if (note) {
       setValue("title", note.title);
       setDescription(note.description);
-      if (quill) {
-        quill.root.innerHTML = note.description;
-      }
     }
-  }, [note, quill, setValue]);
-
-  // Update Quill content
-  useEffect(() => {
-    if (quill) {
-      quill.on("text-change", () => {
-        setDescription(quill.root.innerHTML);
-      });
-    }
-  }, [quill]);
+  }, [note, setValue]);
 
   const mutation = useMutation({
     mutationFn: (updatedData) => updateNoteById(id, updatedData, user.email),
     onSuccess: (res) => {
-        console.log(res);
-        if(res.modifiedCount > 0) {
-      SuccessToast("Note updated successfully");
-      queryClient.invalidateQueries(["note", id]);
-        }
-
+      if (res.modifiedCount > 0) {
+        SuccessToast("Note updated successfully");
+        queryClient.invalidateQueries(["note", id]);
+      } else {
+        ErrorToast("No changes made");
+      }
     },
     onError: () => ErrorToast("Failed to update note"),
   });
 
   const onSubmit = (data) => {
+    if (!description.trim()) {
+      ErrorToast("Note description cannot be empty");
+      return;
+    }
+
     mutation.mutate({
       title: data.title,
       description,
     });
   };
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-10 text-xl font-semibold">Loading note...</div>
+    );
+  }
 
   return (
     <div className="max-w-7xl w-full mx-auto px-4 py-10">
@@ -80,60 +76,62 @@ const UpdateNotes = () => {
             <FaStickyNote /> Update Note
           </h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              {/* Email */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Your Email</span>
-                </label>
-                <input
-                  type="email"
-                  value={user?.email}
-                  readOnly
-                  className="input input-bordered bg-base-200"
-                />
-              </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Email */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Your Email</span>
+              </label>
+              <input
+                type="email"
+                value={user?.email}
+                readOnly
+                className="input input-bordered bg-base-200"
+              />
+            </div>
 
-              {/* Title */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text flex items-center gap-2">
-                    <FaPen /> Note Title
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter note title"
-                  {...register("title", { required: true })}
-                  className="input input-bordered"
-                />
-                {errors.title && (
-                  <span className="text-error text-sm mt-1">Title is required</span>
-                )}
-              </div>
+            {/* Title */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text flex items-center gap-2">
+                  <FaPen /> Note Title
+                </span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter note title"
+                {...register("title", { required: true })}
+                className="input input-bordered"
+              />
+              {errors.title && (
+                <span className="text-error text-sm mt-1">Title is required</span>
+              )}
+            </div>
 
-              {/* Quill Editor */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Note Description</span>
-                </label>
-                <div
-                  ref={quillRef}
-                  className="bg-base-100 border rounded-md min-h-[200px]"
-                />
-              </div>
+            {/* Description (Textarea) */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Note Description</span>
+              </label>
+              <textarea
+                className="textarea textarea-bordered min-h-[150px]"
+                placeholder="Enter your note description here..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </div>
 
-              {/* Submit Button */}
-              <div className="form-control mt-4">
-                <button
-                  type="submit"
-                  className="btn btn-primary flex items-center gap-2 justify-center"
-                >
-                  <FaSave /> Save Note
-                </button>
-              </div>
-            </form>
-
+            {/* Submit Button */}
+            <div className="form-control mt-4">
+              <button
+                type="submit"
+                disabled={mutation.isLoading}
+                className="btn btn-primary flex items-center gap-2 justify-center"
+              >
+                <FaSave /> {mutation.isLoading ? "Saving..." : "Save Note"}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
