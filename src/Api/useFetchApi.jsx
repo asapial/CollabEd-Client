@@ -127,6 +127,9 @@ const getStudentMaterials = (email) => {
   return axiosSecure.get(`/studentMaterials?email=${email}`).then((res) => res.data);
 };
 
+const checkBooked = (email, sessionId) => {
+  return axiosSecure.get(`/checkBooked?email=${email}&sessionId=${sessionId}`).then((res) => res.data);
+};
 
 
 
@@ -160,7 +163,8 @@ getMyBookedSessions,
 postReview,
 getSessionReviews,
 fetchTutors,
-getStudentMaterials
+getStudentMaterials,
+checkBooked
 
 
   };

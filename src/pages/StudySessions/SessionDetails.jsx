@@ -21,7 +21,7 @@ const SessionDetails = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
-  const { getSessionById, getSessionReviews, bookSession, postReview } = useFetchApi();
+  const { getSessionById, getSessionReviews, bookSession, postReview,checkBooked } = useFetchApi();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
 
@@ -33,6 +33,11 @@ const SessionDetails = () => {
   const { data: reviews = [] } = useQuery({
     queryKey: ["sessionReviews", id],
     queryFn: () => getSessionReviews(id),
+  });
+
+  const { data: isBooked = [] } = useQuery({
+    queryKey: ["isBookedData", user?.email],
+    queryFn: () => checkBooked(user?.email, id),
   });
 
   const currentDate = new Date();
@@ -132,12 +137,22 @@ const SessionDetails = () => {
           </div>
 
           <div className="pt-4">
-            <button
-              className="btn btn-primary w-full sm:w-auto"
+<button
               onClick={handleBooking}
-              disabled={!isRegistrationOpen}
+              disabled={!isRegistrationOpen || isBooked || user?.userRole !== "Student"}
+              className={`btn w-full sm:w-auto ${
+                isBooked
+                  ? "btn-outline btn-disabled text-gray-400"
+                  : isRegistrationOpen
+                  ? "btn-primary"
+                  : "btn-disabled"
+              }`}
             >
-              {isRegistrationOpen ? "📅 Book Now" : "❌ Registration Closed"}
+              {isBooked
+                ? "✅ Already Booked"
+                : isRegistrationOpen
+                ? "📅 Book Now"
+                : "❌ Registration Closed"}
             </button>
           </div>
 
