@@ -49,14 +49,14 @@ const AdminDashboardLayout = () => {
       {open ? (
         <button
           onClick={() => setOpen(!open)}
-          className=" top-7  left-5 hidden md:block z-50 fixed"
+          className=" top-7  left-5 hidden md:block z-100 fixed"
         >
           <FaX size={20}></FaX>
         </button>
       ) : (
         <button
           onClick={() => setOpen(!open)}
-          className="  top-7  left-5 hidden md:block  z-50 fixed"
+          className="  top-7  left-5 hidden md:block  z-100 fixed"
         >
           <RiMenuFold4Fill size={20} />
         </button>
@@ -65,7 +65,7 @@ const AdminDashboardLayout = () => {
       {!mobileOpen && (
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className=" top-5  right-5 md:hidden   z-50 fixed "
+          className=" top-5  right-5 md:hidden   z-100 fixed "
         >
           <RiMenuUnfold4Line size={20} />
         </button>

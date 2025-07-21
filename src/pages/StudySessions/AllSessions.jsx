@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaCalendarAlt, FaClock, FaInfoCircle } from "react-icons/fa";
 import useFetchApi from "../../Api/useFetchApi";
@@ -8,21 +8,18 @@ import { Link } from "react-router";
 
 const AllSessions = () => {
   const { getAllSessions } = useFetchApi();
-  const { data: sessions = [], isLoading } = useQuery({
-    queryKey: ["allApprovedSessions"],
-    queryFn: () => getAllSessions(),
-  });
-
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(6);
 
-  const totalPages = useMemo(() => Math.ceil(sessions.length / cardsPerPage), [sessions, cardsPerPage]);
+  const { data, isLoading } = useQuery({
+    queryKey: ["allApprovedSessions", currentPage, cardsPerPage],
+    queryFn: () => getAllSessions(currentPage, cardsPerPage),
+    keepPreviousData: true,
+  });
 
-  const currentSessions = useMemo(() => {
-    const start = (currentPage - 1) * cardsPerPage;
-    const end = start + cardsPerPage;
-    return sessions.slice(start, end);
-  }, [sessions, currentPage, cardsPerPage]);
+  const sessions = data?.sessions || [];
+  const total = data?.total || 0;
+  const totalPages = Math.ceil(total / cardsPerPage);
 
   const getStatus = (start, end) => {
     const now = new Date();
@@ -63,7 +60,7 @@ const AllSessions = () => {
       ) : (
         <>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {currentSessions.map((session) => (
+            {sessions.map((session) => (
               <div
                 key={session._id}
                 className="card bg-base-100 border border-base-200 shadow-xl hover:shadow-2xl transition-shadow duration-300"

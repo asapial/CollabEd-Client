@@ -47,9 +47,11 @@ const getAllUsers = (search = "", page = 1, limit = 10) => {
     return axiosSecure.patch(`/updateUserRole?id=${id}&role=${role}`).then((res) => res.data);
   };
 
-  const getAllSessions=()=>{
-    return axiosSecure.get(`/getAllSessions`).then((res) => res.data);
-  }
+const getAllSessions = (page = 1, limit = 6) => {
+  return axiosSecure
+    .get(`/getAllSessions?page=${page}&limit=${limit}`)
+    .then((res) => res.data);
+};
 
   const approveSession= (data) => {
     return axiosSecure.patch(`/approveSession`, data).then((res) => res.data);
