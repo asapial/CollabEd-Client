@@ -21,9 +21,7 @@ const SessionDetails = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
-  const { getSessionById, getSessionReviews, bookSession, postReview } =
-    useFetchApi();
-
+  const { getSessionById, getSessionReviews, bookSession, postReview } = useFetchApi();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
 

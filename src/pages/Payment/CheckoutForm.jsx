@@ -6,12 +6,14 @@ import { FaLock, FaCreditCard } from "react-icons/fa";
 import axios from "axios";
 import { AuthContext } from "../../main";
 import { SuccessToast } from "../../utils/ToastMaker";
+import { useNavigate } from "react-router";
 
 const CheckoutForm = ({ id }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { getSessionById, bookSession } = useFetchApi();
   const { user } = useContext(AuthContext);
+  const navigate=useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -73,6 +75,7 @@ const CheckoutForm = ({ id }) => {
       }).then((data) => {
         if (data?.acknowledged) {
           SuccessToast("🎉 Session booked successfully!");
+          navigate('/studentDashboard/bookedSession')
         }
       });
     } else if (confirmError) {

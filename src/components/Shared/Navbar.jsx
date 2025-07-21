@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import CollabEdNamePlate from "../NamePlate/CollabEdNamePlate";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../main";
 import SectionContainer from "../SectionContainer/SectionContainer";
 import { CgProfile } from "react-icons/cg";
@@ -27,30 +27,79 @@ const Navbar = () => {
   };
 
   const list = (
-    <>
-      {" "}
-      <li>
-        <Link to={"/tutors"}>Tutor</Link>
-      </li>
-      <li>
-        <Link to={"/allSessions"}>Study sessions</Link>
-      </li>
-      {user?.userRole === "Tutor" && (
-        <li>
-          <Link to={"/tutorDashboard"}>Dashboard</Link>
-        </li>
-      )}
-      {user?.userRole === "Admin" && (
-        <li>
-          <Link to={"/adminDashboard"}>Dashboard</Link>
-        </li>
-      )}
-      {user?.userRole === "Student" && (
-        <li>
-          <Link to={"/studentDashboard"}>Dashboard</Link>
-        </li>
-      )}
-    </>
+<>
+  <li>
+    <NavLink
+      to="/tutors"
+      className={({ isActive }) =>
+        isActive
+          ? "text-primary font-semibold transition"
+          : "hover:text-primary transition"
+      }
+    >
+      Tutor
+    </NavLink>
+  </li>
+
+  <li>
+    <NavLink
+      to="/allSessions"
+      className={({ isActive }) =>
+        isActive
+          ? "text-primary font-semibold transition"
+          : "hover:text-primary transition"
+      }
+    >
+      Study sessions
+    </NavLink>
+  </li>
+
+  {user?.userRole === "Tutor" && (
+    <li>
+      <NavLink
+        to="/tutorDashboard"
+        className={({ isActive }) =>
+          isActive
+            ? "text-primary font-semibold transition"
+            : "hover:text-primary transition"
+        }
+      >
+        Dashboard
+      </NavLink>
+    </li>
+  )}
+
+  {user?.userRole === "Admin" && (
+    <li>
+      <NavLink
+        to="/adminDashboard"
+        className={({ isActive }) =>
+          isActive
+            ? "text-primary font-semibold transition"
+            : "hover:text-primary transition"
+        }
+      >
+        Dashboard
+      </NavLink>
+    </li>
+  )}
+
+  {user?.userRole === "Student" && (
+    <li>
+      <NavLink
+        to="/studentDashboard"
+        className={({ isActive }) =>
+          isActive
+            ? "text-primary font-semibold transition"
+            : "hover:text-primary transition"
+        }
+      >
+        Dashboard
+      </NavLink>
+    </li>
+  )}
+</>
+
   );
 return (
   <>

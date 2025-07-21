@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import { FaX } from "react-icons/fa6";
 import { RiMenuFold4Fill, RiMenuUnfold4Line } from "react-icons/ri";
 import AdminLink from "../components/dashboard/SideBar/DashboardSideBar";
@@ -15,40 +15,68 @@ const TutorDashboardLayout = () => {
   const [open, setOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const links = (
-    <>
-      <Link to="/tutorDashboard/createSession">
-        <li className="flex items-center gap-3 text-lg hover:text-green-600 cursor-pointer transition">
-          <FaUsersCog className="text-xl" />
-          Create study session
-        </li>
-      </Link>
+<>
+  <NavLink
+    to="/tutorDashboard/createSession"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-green-600"
+        : "flex items-center gap-3 text-lg hover:text-green-600 transition"
+    }
+  >
+    <FaUsersCog className="text-xl" />
+    Create study session
+  </NavLink>
 
-      <Link to="/tutorDashboard/mySession">
-        <li className="flex items-center gap-3 text-lg hover:text-purple-600 cursor-pointer transition">
-          <FaChalkboardTeacher className="text-xl" />
-          View all session
-        </li>
-      </Link>
+  <NavLink
+    to="/tutorDashboard/mySession"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-purple-600"
+        : "flex items-center gap-3 text-lg hover:text-purple-600 transition"
+    }
+  >
+    <FaChalkboardTeacher className="text-xl" />
+    View all sessions
+  </NavLink>
 
-      <Link to="/tutorDashboard/uploadMaterials">
-        <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
-          <FaFolderOpen className="text-xl" />
-          Upload materials
-        </li>
-      </Link>
-      <Link to="/tutorDashboard/viewMaterials">
-        <li className="flex items-center gap-3 text-lg hover:text-amber-600 cursor-pointer transition">
-          <FaFolderOpen className="text-xl" />
-          View all materials
-        </li>
-      </Link>
-      <Link to="/tutorDashboard/updateProfile">
-        <li className="flex items-center gap-3 text-lg hover:text-sky-600 cursor-pointer transition">
-          <FaUserEdit className="text-xl" />
-          Update Profile
-        </li>
-      </Link>
-    </>
+  <NavLink
+    to="/tutorDashboard/uploadMaterials"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-blue-600"
+        : "flex items-center gap-3 text-lg hover:text-blue-600 transition"
+    }
+  >
+    <FaFolderOpen className="text-xl" />
+    Upload materials
+  </NavLink>
+
+  <NavLink
+    to="/tutorDashboard/viewMaterials"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-amber-600"
+        : "flex items-center gap-3 text-lg hover:text-amber-600 transition"
+    }
+  >
+    <FaFolderOpen className="text-xl" />
+    View all materials
+  </NavLink>
+
+  <NavLink
+    to="/tutorDashboard/updateProfile"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-sky-600"
+        : "flex items-center gap-3 text-lg hover:text-sky-600 transition"
+    }
+  >
+    <FaUserEdit className="text-xl" />
+    Update Profile
+  </NavLink>
+</>
+
   );
 
   return (

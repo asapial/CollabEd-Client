@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import { FaX } from "react-icons/fa6";
 import { RiMenuFold4Fill, RiMenuUnfold4Line } from "react-icons/ri";
 import AdminLink from "../components/dashboard/SideBar/DashboardSideBar";
@@ -14,40 +14,68 @@ const StudentDashboardLayout = () => {
   const [open, setOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const links = (
-    <>
-      <Link to="/studentDashboard/bookedSession">
-        <li className="flex items-center gap-3 text-lg hover:text-green-600 cursor-pointer transition">
-          <FaUsersCog className="text-xl" />
-          View booked session
-        </li>
-      </Link>
+<>
+  <NavLink
+    to="/studentDashboard/bookedSession"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-green-600"
+        : "flex items-center gap-3 text-lg hover:text-green-600 transition"
+    }
+  >
+    <FaUsersCog className="text-xl" />
+    View booked session
+  </NavLink>
 
-      <Link to="/studentDashboard/createNote">
-        <li className="flex items-center gap-3 text-lg hover:text-purple-600 cursor-pointer transition">
-          <FaChalkboardTeacher className="text-xl" />
-          Create note
-        </li>
-      </Link>
+  <NavLink
+    to="/studentDashboard/createNote"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-purple-600"
+        : "flex items-center gap-3 text-lg hover:text-purple-600 transition"
+    }
+  >
+    <FaChalkboardTeacher className="text-xl" />
+    Create note
+  </NavLink>
 
-      <Link to="/studentDashboard/manageNotes">
-        <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
-          <FaFolderOpen className="text-xl" />
-          Manage personal notes
-        </li>
-      </Link>
-      <Link to="/studentDashboard/studyMaterials">
-        <li className="flex items-center gap-3 text-lg hover:text-amber-600 cursor-pointer transition">
-          <FaFolderOpen className="text-xl" />
-          View all Materials
-        </li>
-      </Link>
-<Link to="/studentDashboard/updateProfile">
-  <li className="flex items-center gap-3 text-lg hover:text-sky-600 cursor-pointer transition">
+  <NavLink
+    to="/studentDashboard/manageNotes"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-blue-600"
+        : "flex items-center gap-3 text-lg hover:text-blue-600 transition"
+    }
+  >
+    <FaFolderOpen className="text-xl" />
+    Manage personal notes
+  </NavLink>
+
+  <NavLink
+    to="/studentDashboard/studyMaterials"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-amber-600"
+        : "flex items-center gap-3 text-lg hover:text-amber-600 transition"
+    }
+  >
+    <FaFolderOpen className="text-xl" />
+    View all Materials
+  </NavLink>
+
+  <NavLink
+    to="/studentDashboard/updateProfile"
+    className={({ isActive }) =>
+      isActive
+        ? "flex items-center gap-3 text-lg font-semibold text-sky-600"
+        : "flex items-center gap-3 text-lg hover:text-sky-600 transition"
+    }
+  >
     <FaUserEdit className="text-xl" />
     Update Profile
-  </li>
-</Link>
-    </>
+  </NavLink>
+</>
+
   );
 
   return (
