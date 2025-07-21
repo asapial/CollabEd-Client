@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { FiMail } from "react-icons/fi";
-import { ErrorToast, SuccessToast } from "../../Utilities/ToastMaker";
 import { AuthContext } from "../../main";
+import { ErrorToast, SuccessToast } from "../../utils/ToastMaker";
 
 const ResetLink = () => {
   const navigate = useNavigate();
@@ -22,7 +22,6 @@ const handleReset = async (e) => {
 };
   return (
     <div className="min-h-screen flex items-center justify-center px-4 custom-gradient bg-gradient-to-br from-base-100 to-base-300">
-      <title>Reset | PlayPulse</title>
       <div className="bg-base-100 rounded-2xl w-full max-w-lg mx-auto flex flex-col justify-center items-center border border-primary shadow-primary shadow p-8">
         <h2 className="text-3xl font-bold text-center text-accent-800 mb-6">
           Forgot Password

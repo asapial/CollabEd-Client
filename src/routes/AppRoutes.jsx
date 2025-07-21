@@ -11,7 +11,6 @@ import UploadMaterials from "../pages/dashboard/tutor/UploadMaterials";
 import CreateSession from "../pages/dashboard/tutor/CreateSession";
 import MySessions from "../pages/dashboard/tutor/MySessions";
 import ViewMaterials from "../pages/dashboard/tutor/ViewMaterials";
-import Loading from "../pages/Others/Loading";
 import ManageUsers from "../pages/dashboard/admin/ManageUsers";
 import ManageSessions from "../pages/dashboard/admin/ManageSessions";
 import ManageMaterials from "../pages/dashboard/admin/ManageMaterials";
@@ -25,6 +24,9 @@ import SessionDetails from "../pages/StudySessions/SessionDetails";
 import PrivateRoute from "../RouteProtector/PrivateRoute";
 import AllTutors from "../pages/Tutors/AllTutors";
 import Payment from "../pages/Payment/Payment";
+import ResetLink from "../pages/Auth/ResetLink";
+import UpdateProfile from "../pages/Auth/UpdateProfile";
+import StudentOverview from "../pages/dashboard/student/StudentOverview";
 
 const router = createBrowserRouter([
   {
@@ -44,8 +46,8 @@ const router = createBrowserRouter([
         Component: Register,
       },
       // {
-      //     path:"resetLink",
-      //     Component: ResetLink
+          // path:"resetLink",
+          // Component: ResetLink
       // }
       {
           path:"allSessions",
@@ -85,6 +87,10 @@ const router = createBrowserRouter([
         path: "allMaterials",
         Component: ManageMaterials ,
       },
+      {
+          path:"updateProfile",
+          Component: UpdateProfile
+      },
 
     ],
   },
@@ -115,7 +121,11 @@ const router = createBrowserRouter([
       {
         path:"viewMaterials",
         Component:ViewMaterials
-      }
+      },
+      {
+          path:"updateProfile",
+          Component: UpdateProfile
+      },
     ],
   },
   {
@@ -124,7 +134,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Banner,
+        Component: StudentOverview,
       },
       {
         path: "bookedSession",
@@ -145,6 +155,10 @@ const router = createBrowserRouter([
       {
         path: "studyMaterials",
         Component: StudyMaterials
+      },
+      {
+          path:"updateProfile",
+          Component: UpdateProfile
       },
     ],
   },

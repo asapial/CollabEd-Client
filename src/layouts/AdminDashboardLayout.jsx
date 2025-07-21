@@ -30,9 +30,15 @@ const AdminDashboardLayout = () => {
       </Link>
 
       <Link to="/adminDashboard/allMaterials">
-        <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
+        <li className="flex items-center gap-3 text-lg hover:text-amber-600 cursor-pointer transition">
           <FaFolderOpen className="text-xl" />
           All Materials
+        </li>
+      </Link>
+      <Link to="/adminDashboard/updateProfile">
+        <li className="flex items-center gap-3 text-lg hover:text-sky-600 cursor-pointer transition">
+          <FaUserEdit className="text-xl" />
+          Update Profile
         </li>
       </Link>
     </>

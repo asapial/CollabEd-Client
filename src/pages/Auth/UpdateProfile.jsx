@@ -8,10 +8,9 @@ import {
   FaEyeSlash,
 } from "react-icons/fa";
 import { AuthContext } from "../../main";
-import Playpulsebutton from "../../Atoms/Playpulsebutton";
-import { ErrorToast, SuccessToast } from "../../Utilities/ToastMaker";
-import Playpulsenameplate from "../../Atoms/Playpulsenameplate";
 import { motion } from "framer-motion";
+import { ErrorToast, SuccessToast } from "../../utils/ToastMaker";
+import CollabEdNamePlate from "../../components/NamePlate/CollabEdNamePlate";
 
 const UpdateProfile = () => {
   const { updateUser, user } = useContext(AuthContext);
@@ -33,7 +32,6 @@ const UpdateProfile = () => {
 
   return (
     <section className="min-h-screen custom-gradient flex items-center justify-center px-4 py-10">
-      <title>PlayPulse | Update Profile</title>
       <div className="bg-base-100 shadow rounded-2xl w-full lg:max-w-5xl mx-auto lg:flex justify-center items-center border border-primary shadow-primary ">
         {/* Profile Image with Breathing Effect */}
         <div className="w-full lg:w-2/5 flex justify-center items-center p-10">
@@ -55,7 +53,7 @@ const UpdateProfile = () => {
         {/* Registration Form */}
         <div className="p-8 space-y-6 w-full lg:w-3/5">
           <h2 className="text-3xl font-extrabold text-center text-neutral flex justify-center items-center">
-            Join <Playpulsenameplate></Playpulsenameplate>
+            Join <CollabEdNamePlate></CollabEdNamePlate>
           </h2>
           <p className="text-center text-neutral text-sm">
             Update your profile
@@ -101,8 +99,8 @@ const UpdateProfile = () => {
             </div>
 
             {/* Submit Button */}
-            <button type="submit" className="w-full">
-              <Playpulsebutton>Update Profile</Playpulsebutton>
+            <button type="submit" className="btn btn-primary w-full">
+              Update Profile
             </button>
           </form>
         </div>

@@ -8,7 +8,7 @@ import Navbar from "../components/Shared/Navbar";
 import Footer from "../components/Shared/Footer";
 import DashboardSideBar from "../components/dashboard/SideBar/DashboardSideBar";
 import DashboardDrawer from "../components/dashboard/SideBar/DashboardDrawer";
-import { FaChalkboardTeacher, FaFolderOpen, FaUsersCog } from "react-icons/fa";
+import { FaChalkboardTeacher, FaFolderOpen, FaUserEdit, FaUsersCog } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 
 const TutorDashboardLayout = () => {
@@ -37,9 +37,15 @@ const TutorDashboardLayout = () => {
         </li>
       </Link>
       <Link to="/tutorDashboard/viewMaterials">
-        <li className="flex items-center gap-3 text-lg hover:text-blue-600 cursor-pointer transition">
+        <li className="flex items-center gap-3 text-lg hover:text-amber-600 cursor-pointer transition">
           <FaFolderOpen className="text-xl" />
           View all materials
+        </li>
+      </Link>
+      <Link to="/tutorDashboard/updateProfile">
+        <li className="flex items-center gap-3 text-lg hover:text-sky-600 cursor-pointer transition">
+          <FaUserEdit className="text-xl" />
+          Update Profile
         </li>
       </Link>
     </>
