@@ -28,6 +28,7 @@ import ResetLink from "../pages/Auth/ResetLink";
 import UpdateProfile from "../pages/Auth/UpdateProfile";
 import StudentOverview from "../pages/dashboard/student/StudentOverview";
 import TutorOverview from "../pages/dashboard/tutor/TutorOverview";
+import AdminOverview from "../pages/dashboard/admin/AdminOverview";
 
 const router = createBrowserRouter([
   {
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Banner,
+        Component: AdminOverview,
       },
       {
         path: "allUsers",

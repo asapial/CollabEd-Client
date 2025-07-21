@@ -8,7 +8,7 @@ import Navbar from "../components/Shared/Navbar";
 import Footer from "../components/Shared/Footer";
 import DashboardSideBar from "../components/dashboard/SideBar/DashboardSideBar";
 import DashboardDrawer from "../components/dashboard/SideBar/DashboardDrawer";
-import { FaChalkboardTeacher, FaFolderOpen, FaUsersCog } from "react-icons/fa";
+import { FaChalkboardTeacher, FaFolderOpen, FaUserEdit, FaUsersCog } from "react-icons/fa";
 
 const AdminDashboardLayout = () => {
   const [open, setOpen] = useState(true);
