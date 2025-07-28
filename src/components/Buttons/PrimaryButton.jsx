@@ -11,6 +11,7 @@ const PrimaryButton = ({ children, onClick, type = "button", className = "" }) =
         hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500
         text-white dark:text-white
         dark:from-indigo-600 dark:via-purple-600 dark:to-pink-600
+        w-full
         ${className}
       `}
     >

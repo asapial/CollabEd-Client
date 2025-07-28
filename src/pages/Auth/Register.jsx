@@ -17,14 +17,44 @@ import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import { ErrorToast, SuccessToast } from "../../utils/ToastMaker";
 import CollabEdNamePlate from "../../components/NamePlate/CollabEdNamePlate";
 import useFetchApi from "../../Api/useFetchApi";
-import {  handleInsertDataRegister } from "../../utils/insertData";
+import { handleInsertDataRegister } from "../../utils/insertData";
 
 const Register = () => {
-  const { createUser, loginWithGoogle,mongoLoading, setMongoLoading } = useContext(AuthContext);
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+  const { createUser, loginWithGoogle, mongoLoading, setMongoLoading } =
+    useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMassage, setErrorMassage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
   const { findTheUser, postTheUser } = useFetchApi();
+
+  const imgbbApiKey = "68b7bc6153340102cff282ce4476f3fd"; // Replace with your real API key
+
+  const handleImageUpload = (event) => {
+    const image = event.target.files[0];
+    if (!image) return;
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    setUploading(true);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setImageUrl(data.data.display_url);
+        setUploading(false);
+        SuccessToast("Image uploaded successfully!");
+      })
+      .catch((err) => {
+        console.error(err);
+        ErrorToast("Image upload failed!");
+        setUploading(false);
+      });
+  };
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -32,19 +62,23 @@ const Register = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const photoURL = form.photoURL.value;
-    console.log(email, password, name, photoURL);
 
-    // password validation
+    if (!imageUrl) {
+      ErrorToast("Please wait for the image to upload!");
+      return;
+    }
 
-    console.log(errorMassage);
     if (!passwordValidator(password, setErrorMassage)) return;
 
-    createUser(email, password, name, photoURL)
+    createUser(email, password, name, imageUrl)
       .then((data) => {
-        console.log(data);
-
-        handleInsertDataRegister(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
+        handleInsertDataRegister(
+          data,
+          findTheUser,
+          postTheUser,
+          mongoLoading,
+          setMongoLoading
+        );
         SuccessToast("Registration Successful");
         navigate("/");
       })
@@ -56,8 +90,13 @@ const Register = () => {
   const handleRegisterWithGmail = () => {
     loginWithGoogle()
       .then((data) => {
-        // Registration successful, show success message or redirect
-        handleInsertDataRegister(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
+        handleInsertDataRegister(
+          data,
+          findTheUser,
+          postTheUser,
+          mongoLoading,
+          setMongoLoading
+        );
         SuccessToast("Registration Successful");
       })
       .catch((error) => {
@@ -76,7 +115,7 @@ const Register = () => {
         {/* Registration Form */}
         <div className="p-8 space-y-6 w-full lg:w-3/5">
           <h2 className="text-3xl lg:text-5xl font-extrabold flex items-center justify-center gap-2 text-neutral">
-            Join <CollabEdNamePlate></CollabEdNamePlate>
+            Join <CollabEdNamePlate />
           </h2>
           <p className="text-center text-neutral text-lg my-2">
             Create an account to get started
@@ -128,28 +167,43 @@ const Register = () => {
               </span>
             </div>
 
-            {/* password error  */}
-
+            {/* Password Error */}
             {errorMassage && (
               <div className="flex items-center gap-2 bg-red-100 text-red-700 border border-red-300 px-4 py-2 rounded-lg shadow-sm text-sm">
                 <span>{errorMassage}</span>
               </div>
             )}
 
-            {/* Profile Photo Link */}
-            <div className="relative">
-              <FaImage className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="url"
-                name="photoURL"
-                placeholder="Profile Photo URL"
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              />
+            {/* Upload Profile Photo */}
+            <div>
+              <label className="block text-sm mb-2 text-gray-600">
+                Upload Profile Photo
+              </label>
+              <div className="relative flex items-center gap-4">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="file-input file-input-bordered w-full"
+                  required
+                />
+                {uploading && <span className="text-sm">Uploading...</span>}
+              </div>
+
+              {imageUrl && (
+                <img
+                  src={imageUrl}
+                  alt="Uploaded"
+                  className="mt-2 h-20 rounded-md shadow"
+                />
+              )}
             </div>
 
             {/* Submit Button */}
             <button type="submit" className="w-full">
-              <PrimaryButton>Register</PrimaryButton>
+              <PrimaryButton>
+                {uploading ? "Please wait..." : "Register"}
+              </PrimaryButton>
             </button>
           </form>
 
@@ -160,16 +214,16 @@ const Register = () => {
             <div className="border-t border-gray-300 w-full"></div>
           </div>
 
-          {/* Google Sign-In Button */}
+          {/* Google Sign-In */}
           <button
             onClick={handleRegisterWithGmail}
             type="button"
-            className="w-full flex items-center justify-center gap-3 py-3  bg-base-200 rounded-xl shadow-sm 
-                         hover:bg-base-100 transition duration-300 ease-in-out text-neutral font-medium"
+            className="w-full flex items-center justify-center gap-3 py-3 bg-base-200 rounded-xl shadow-sm hover:bg-base-100 transition duration-300 ease-in-out text-neutral font-medium"
           >
             <FcGoogle className="text-xl" />
             Sign in with Google
           </button>
+
           {/* Footer */}
           <div className="text-center text-sm text-neutral">
             Already have an account?{" "}
