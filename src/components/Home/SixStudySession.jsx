@@ -10,6 +10,7 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import useFetchApi from "../../Api/useFetchApi";
 import Loading from "../../pages/Others/Loading";
+import SectionContainer from "../SectionContainer/SectionContainer";
 
 const SixStudySession = () => {
   const { getSixSessions } = useFetchApi();
@@ -34,9 +35,10 @@ const SixStudySession = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 flex items-center justify-center gap-3">
-        <FaBookOpen className="text-primary text-2xl" />
+    <SectionContainer className="customGradiant1">
+
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 flex items-center justify-center gap-3 text-primary">
+        <FaBookOpen className="" />
         Available Study Sessions
       </h2>
 
@@ -72,7 +74,7 @@ const SixStudySession = () => {
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.5 }}
-                className="card bg-base-100 shadow-primary shadow-sm hover:shadow-lg transition-shadow border border-base-300"
+                className=" border border-primary/25 hover:border-primary hover:shadow-primary shadow-sm customGradiant3 rounded-2xl "
               >
                 <div className="card-body space-y-3">
                   <h3 className="text-xl font-semibold flex items-center gap-2">
@@ -80,7 +82,7 @@ const SixStudySession = () => {
                     {session.title}
                   </h3>
 
-                  <p className="line-clamp-4 text-sm opacity-80">{session.description}</p>
+                  <p className="line-clamp-4 text-sm text-justify">{session.description}</p>
 
                   <div className="flex items-center gap-2 text-sm">
                     <FaCalendarAlt className="text-secondary" />
@@ -123,7 +125,9 @@ const SixStudySession = () => {
           })}
         </motion.div>
       )}
-    </section>
+
+    </SectionContainer>
+
   );
 };
 

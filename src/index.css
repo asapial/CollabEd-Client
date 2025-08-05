@@ -4,7 +4,7 @@
  } */
 
 
-@plugin "daisyui/theme" {
+/* @plugin "daisyui/theme" {
   name: "CollabEdLight";
   default: false;
   prefersdark: false;
@@ -37,6 +37,54 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
+} */
+
+
+
+@plugin "daisyui/theme" {
+  name: "CollabEdLight";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+
+  --color-base-100: oklch(100% 0 0);         /* White background */
+  --color-base-200: oklch(94% 0.01 250);     /* Light surface */
+  --color-base-300: oklch(87% 0.015 250);    /* Slightly darker surface */
+  --color-base-content: oklch(25% 0.02 260); /* Standard text */
+
+  --color-primary: oklch(62% 0.18 240);        /* Professional blue */
+  --color-primary-content: oklch(100% 0 0);    /* White text on primary */
+
+  --color-secondary: oklch(60% 0.1 170);       /* Muted teal/green secondary */
+  --color-secondary-content: oklch(100% 0 0);
+
+  --color-accent: oklch(66% 0.15 190);         /* Accent cyan/green */
+  --color-accent-content: oklch(100% 0 0);
+
+  --color-neutral: oklch(18% 0.015 260);       /* Neutral dark gray */
+  --color-neutral-content: oklch(98% 0.01 240);
+
+  --color-info: oklch(66% 0.2 230);            /* Info blue */
+  --color-info-content: oklch(100% 0 0);
+
+  --color-success: oklch(65% 0.2 145);         /* Positive green */
+  --color-success-content: oklch(100% 0 0);
+
+  --color-warning: oklch(85% 0.2 90);          /* Soft yellow/orange */
+  --color-warning-content: oklch(0% 0 0);
+
+  --color-error: oklch(68% 0.21 25);           /* Error red */
+  --color-error-content: oklch(100% 0 0);
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
 
@@ -50,10 +98,11 @@
   --color-base-200: oklch(20% 0.042 265.755);
   --color-base-300: oklch(27% 0.041 260.031);
   --color-base-content: oklch(96% 0.007 247.896);
-  --color-primary: oklch(60% 0.25 292.717);
-  --color-primary-content: oklch(96% 0.016 293.756);
-  --color-secondary: oklch(63% 0.237 25.331);
-  --color-secondary-content: oklch(97% 0.013 17.38);
+   --color-primary: oklch(62% 0.18 240);        /* Professional blue */
+  --color-primary-content: oklch(100% 0 0);    /* White text on primary */
+
+  --color-secondary: oklch(60% 0.1 170);       /* Muted teal/green secondary */
+  --color-secondary-content: oklch(100% 0 0);
   --color-accent: oklch(63% 0.237 25.331);
   --color-accent-content: oklch(97% 0.013 17.38);
   --color-neutral: oklch(44% 0.043 257.281);
@@ -89,3 +138,22 @@
 .react-tabs__tab {
   @apply px-4 py-2 rounded-md transition-all duration-200 hover:bg-base-200;
 }
+
+ /* [data-theme="CollabEdLight"] .customGradiant1 {
+  background: linear-gradient(to bottom right, #fff8f1, #fde7d4, #f9dcc4);
+
+ } */
+ /* [data-theme="CollabEdLight"] .customGradiant2 {
+background: linear-gradient(to bottom right, #e6f4f1, #dbece9, #f8fbfa);
+
+ } */
+ 
+ [data-theme="CollabEdLight"] .customGradiant1 {
+background: #ffffff;
+
+ }
+
+ [data-theme="CollabEdLight"] .customGradiant3 {
+background:#FEFFED ;
+
+ }
