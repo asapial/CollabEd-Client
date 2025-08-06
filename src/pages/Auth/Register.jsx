@@ -114,7 +114,7 @@ const Register = () => {
 
         {/* Registration Form */}
         <div className="p-8 space-y-6 w-full lg:w-3/5">
-          <h2 className="text-3xl lg:text-5xl font-extrabold flex items-center justify-center gap-2 text-neutral">
+          <h2 className="text-3xl lg:text-4xl font-extrabold flex items-center justify-center gap-2 text-neutral">
             Join <CollabEdNamePlate />
           </h2>
           <p className="text-center text-neutral text-lg my-2">
@@ -218,7 +218,7 @@ const Register = () => {
           <button
             onClick={handleRegisterWithGmail}
             type="button"
-            className="w-full flex items-center justify-center gap-3 py-3 bg-base-200 rounded-xl shadow-sm hover:bg-base-100 transition duration-300 ease-in-out text-neutral font-medium"
+            className="w-full flex items-center justify-center gap-3 py-3 bg-base-200/40 rounded-xl shadow-md hover:bg-base-100 transition duration-300 ease-in-out  font-medium border border-primary"
           >
             <FcGoogle className="text-xl" />
             Sign in with Google

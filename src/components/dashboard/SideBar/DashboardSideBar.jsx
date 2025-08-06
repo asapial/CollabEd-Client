@@ -23,7 +23,7 @@ const DashboardSideBar = ({links}) => {
 
 
   return (
-    <div className="w-full h-full p-5 bg-base-200">
+    <div className="w-full h-full p-5 customGradiant2">
       <div className="flex flex-col items-center gap-6">
         {/* Dashboard Title */}
         <div className="w-full flex items-center justify-center mb-2">

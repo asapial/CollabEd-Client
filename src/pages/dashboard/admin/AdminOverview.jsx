@@ -48,7 +48,7 @@ const AdminOverview = () => {
   }
 
   return (
-    <SectionContainer>
+    <SectionContainer className="customGradiant3 min-h-screen">
       <h1 className="text-3xl lg:text-5xl font-bold text-center mb-6">
         Welcome Admin,{" "}
         <span className="text-primary">{user?.displayName || "Admin"}</span>
@@ -56,7 +56,7 @@ const AdminOverview = () => {
 
       {/* Overview Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
+        <div className="customGradiant2 border-2 border-primary rounded-xl shadow-primary p-6 flex items-center gap-5 hover:shadow-sm transition duration-300 ">
           <FaUsersCog className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Total Users</h3>
@@ -64,7 +64,7 @@ const AdminOverview = () => {
           </div>
         </div>
 
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
+        <div className="customGradiant2 border-2 border-primary rounded-xl shadow-primary p-6 flex items-center gap-5 hover:shadow-sm transition duration-300 ">
           <FaUserGraduate className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Total Students</h3>
@@ -72,7 +72,7 @@ const AdminOverview = () => {
           </div>
         </div>
 
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
+        <div className="customGradiant2 border-2 border-primary rounded-xl shadow-primary p-6 flex items-center gap-5 hover:shadow-sm transition duration-300 ">
           <FaChalkboardTeacher className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Total Tutors</h3>
@@ -80,7 +80,7 @@ const AdminOverview = () => {
           </div>
         </div>
 
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
+        <div className="customGradiant2 border-2 border-primary rounded-xl shadow-primary p-6 flex items-center gap-5 hover:shadow-sm transition duration-300 ">
           <FaUserShield className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Total Admins</h3>
@@ -90,8 +90,8 @@ const AdminOverview = () => {
       </div>
 
       {/* Pie Chart for User Distribution */}
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6   hover:shadow-lg transition duration-300">
-        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <div className=" customGradiant2 rounded-2xl px-6 py-10 border-2 border-primary shadow-primary  hover:shadow-sm transition duration-300">
+        <h2 className="text-3xl font-semibold mb-4 flex items-center justify-center gap-2 text-primary">
           <FaChartPie className="text-primary" />
           User Role Distribution
         </h2>

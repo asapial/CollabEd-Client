@@ -42,7 +42,7 @@ const topSessions = [
 
 const TopCollaborations = () => {
   return (
-    <SectionContainer className=" customGradiant3">
+    <SectionContainer className=" customGradiant2">
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold text-primary">
           🌟 Top Collaborations

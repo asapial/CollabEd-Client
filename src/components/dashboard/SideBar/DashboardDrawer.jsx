@@ -26,7 +26,7 @@ const DashboardDrawer = ({ mobileOpen, setMobileOpen, links }) => {
       />
 
       {/* Drawer */}
-      <div className="fixed top-0 left-0 h-screen w-[80vw] max-w-xs bg-base-200 shadow-lg z-[2000] flex flex-col p-4 transform transition-transform duration-300">
+      <div className="fixed top-0 left-0 h-screen w-[80vw] max-w-xs customGradiant2 shadow-lg z-[2000] flex flex-col p-4 transform transition-transform duration-300">
         {/* Close Button */}
         <button
           onClick={() => setMobileOpen(false)}
@@ -37,7 +37,7 @@ const DashboardDrawer = ({ mobileOpen, setMobileOpen, links }) => {
         </button>
 
         {/* Sidebar Links */}
-            <div className="w-full h-full p-5 bg-base-200">
+            <div className="w-full h-full p-5 customGradiant2">
               <div className="flex flex-col items-center gap-6">
                 {/* Dashboard Title */}
                 <div className="w-full flex items-center justify-center mb-2">

@@ -6,19 +6,19 @@ import { FaRocket, FaInfoCircle } from "react-icons/fa";
 
 const Banner = () => {
   return (
-    <SectionContainer className="bg-base-200">
+    <SectionContainer className=" customGradiant2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-16 px-4">
         {/* Left content */}
         <div className="text-center md:text-left space-y-6">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-primary">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-primary">
             <span className="block">Shared</span>
-            <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="block ">
               Collaborative
             </span>
             <span className="block">Platform for Education</span>
           </h1>
 
-          <p className="text-base md:text-lg text-accent leading-relaxed max-w-xl mx-auto md:mx-0">
+          <p className="text-base md:text-lg text-secondary leading-relaxed max-w-xl mx-auto md:mx-0">
             Empower your learning journey with a smart platform built for collaboration,
             tutor guidance, and real-time educational support. Take notes, attend sessions,
             and grow together.

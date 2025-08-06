@@ -139,21 +139,46 @@
   @apply px-4 py-2 rounded-md transition-all duration-200 hover:bg-base-200;
 }
 
- /* [data-theme="CollabEdLight"] .customGradiant1 {
-  background: linear-gradient(to bottom right, #fff8f1, #fde7d4, #f9dcc4);
-
- } */
- /* [data-theme="CollabEdLight"] .customGradiant2 {
-background: linear-gradient(to bottom right, #e6f4f1, #dbece9, #f8fbfa);
-
- } */
- 
  [data-theme="CollabEdLight"] .customGradiant1 {
-background: #ffffff;
-
+ background: linear-gradient(
+  to bottom right,
+  #fffdfa,
+  #fef9f3,
+  #f8f1e8
+);
  }
 
- [data-theme="CollabEdLight"] .customGradiant3 {
+ [data-theme="CollabEdLight"] .customGradiant2 {
 background:#FEFFED ;
+ }
+ 
 
+ [data-theme="CollabEdLight"] .customGradiant3 {
+background: linear-gradient(to bottom right, #e6f4f1, #dbece9, #f8fbfa);
+ }
+
+ /* --------------- dark theme -------  */
+
+ [data-theme="CollabEdDark"] .customGradiant1 {
+background: linear-gradient(
+  to bottom right,
+  #1c1f24,   /* deep charcoal */
+  #2a2e35,   /* dark slate gray */
+  #202428    /* soft near-black */
+);
+ }
+
+ [data-theme="CollabEdDark"] .customGradiant2 {
+background:#2D4356 ;
+ }
+
+
+
+ [data-theme="CollabEdDark"] .customGradiant3 {
+background: linear-gradient(
+  to bottom right,
+  #0d1217,
+  #1f2937,
+  #223344
+);
  }

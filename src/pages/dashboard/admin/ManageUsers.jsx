@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { FaUserEdit, FaSearch } from "react-icons/fa";
+import { FaUserEdit, FaSearch, FaUsersCog } from "react-icons/fa";
 import useFetchApi from "../../../Api/useFetchApi";
 import { SuccessToast, ErrorToast } from "../../../utils/ToastMaker";
 import { AuthContext } from "../../../main";
+import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 const ManageUsers = () => {
   const { getAllUsers, updateUserRole } = useFetchApi();
@@ -38,8 +39,9 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 py-10 max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold text-center mb-6">Manage Users</h2>
+<SectionContainer className="customGradiant3">
+
+      <h2 className="text-4xl font-bold text-center mb-6 flex justify-center items-center text-green-500"><FaUsersCog />Manage Users</h2>
 
       {/* Search Bar */}
       <div className="mb-6 flex items-center gap-2 max-w-md mx-auto">
@@ -56,10 +58,10 @@ const ManageUsers = () => {
       </div>
 
       {/* Users Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto border border-primary rounded-2xl">
         <table className="table table-zebra bg-base-100 rounded-box">
-          <thead>
-            <tr className="text-base-content/70">
+          <thead className="bg-primary/10">
+            <tr className="text-base">
               <th>#</th>
               <th>Name</th>
               <th>Email</th>
@@ -137,7 +139,7 @@ const ManageUsers = () => {
           ))}
         </div>
       )}
-    </div>
+</SectionContainer>
   );
 };
 

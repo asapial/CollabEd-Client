@@ -10,14 +10,15 @@ import { AuthContext } from "../../main";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import CollabEdNamePlate from "../../components/NamePlate/CollabEdNamePlate";
 import useFetchApi from "../../Api/useFetchApi";
-import {  handleInsertDataLogin } from "../../utils/insertData";
+import { handleInsertDataLogin } from "../../utils/insertData";
 
 const Login = () => {
-  const { loginUser, loginWithGoogle,     mongoLoading, setMongoLoading } = useContext(AuthContext);
+  const { loginUser, loginWithGoogle, mongoLoading, setMongoLoading } =
+    useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   // const [previousUser, setPreviousUser] = useState(false);
   const navigate = useNavigate();
-  const location=useLocation();
+  const location = useLocation();
   const { findTheUser, postTheUser } = useFetchApi();
   const handleLogin = (event) => {
     event.preventDefault();
@@ -29,10 +30,16 @@ const Login = () => {
     loginUser(email, password)
       .then((data) => {
         console.log(data);
-        handleInsertDataLogin(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
+        handleInsertDataLogin(
+          data,
+          findTheUser,
+          postTheUser,
+          mongoLoading,
+          setMongoLoading
+        );
         SuccessToast("Login Successful — Great to see you again!");
 
-            navigate(`${location.state ? location.state : "/"}`);
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         ErrorToast(`Error Occurred: ${error.message}`);
@@ -42,7 +49,13 @@ const Login = () => {
   const handleLoginWithGmail = () => {
     loginWithGoogle()
       .then((data) => {
-        handleInsertDataLogin(data, findTheUser, postTheUser,mongoLoading, setMongoLoading);
+        handleInsertDataLogin(
+          data,
+          findTheUser,
+          postTheUser,
+          mongoLoading,
+          setMongoLoading
+        );
         SuccessToast("Login Successful — Great to see you again!");
         navigate(`${location.state ? location.state : "/"}`);
       })
@@ -129,15 +142,15 @@ const Login = () => {
           <button
             onClick={handleLoginWithGmail}
             type="button"
-            className="w-full flex items-center justify-center gap-3 py-3  bg-base-300 rounded-xl shadow-sm 
-             hover:border-primary transition duration-300 ease-in-out text-neutral font-medium"
+            className="w-full flex items-center justify-center gap-3 py-3  bg-base-200/30 rounded-xl shadow-md
+             hover:border-primary transition duration-300 ease-in-out text-neutral font-medium border border-primary"
           >
             <FcGoogle className="text-xl" />
             Sign in with Google
           </button>
 
           {/* Footer */}
-          <div className="text-center text-sm text-neutral">
+          <div className="text-center text-sm text-neutral mt-10">
             Don’t have an account?{" "}
             <a href="/register" className="text-secondary hover:underline">
               Register
