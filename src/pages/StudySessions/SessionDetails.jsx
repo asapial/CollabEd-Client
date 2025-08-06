@@ -95,19 +95,19 @@ const SessionDetails = () => {
   if (loadingSession) return <Loading />;
 
   return (
-    <SectionContainer className="bg-base-200 min-h-screen py-10">
+    <SectionContainer className="customGradiant1 min-h-screen py-10">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="card bg-base-100 shadow-lg border border-base-300"
+        className="card bg-base-100  border-2 border-primary rounded-2xl p-5 shadow-primary hover:shadow-sm transition-shadow duration-500  "
       >
         <div className="card-body space-y-6">
-          <h2 className="text-3xl font-bold flex gap-2 items-center text-primary">
+          <h2 className="text-4xl font-bold flex gap-2 items-center justify-center text-primary">
             <FaBookOpen /> {session.title}
           </h2>
 
-          <div className="space-y-2">
+          <div className="space-y-2 text-base">
             <p className="flex gap-2 items-center text-base-content">
               <FaUser /> <span className="font-medium">Tutor:</span>{" "}
               {session.tutorName}
@@ -118,11 +118,11 @@ const SessionDetails = () => {
             </p>
           </div>
 
-          <p className="text-justify text-sm opacity-90">
+          <p className="text-justify text-lg ">
             {session.description}
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-5 text-sm">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-5 text-base">
             <p className="flex items-center gap-2">
               <FaCalendarAlt />{" "}
               <span className="font-medium">Registration:</span>{" "}
@@ -172,10 +172,10 @@ const SessionDetails = () => {
             <form onSubmit={handleReviewSubmit} className="space-y-4">
               <h4 className="text-lg font-semibold">📝 Leave a Review</h4>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-1 gap-4">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Rating (1–5)</span>
+                    <span className="label-text font-bold">Rating (1–5)</span>
                   </label>
                   <input
                     type="number"
@@ -189,7 +189,7 @@ const SessionDetails = () => {
 
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Your Comment</span>
+                    <span className="label-text font-bold">Your Comment</span>
                   </label>
                   <textarea
                     className="textarea textarea-bordered"
@@ -201,7 +201,7 @@ const SessionDetails = () => {
               </div>
 
               <button
-                className="btn btn-accent flex items-center gap-2 mt-2"
+                className="btn btn-primary flex items-center gap-2 mt-2"
                 type="submit"
               >
                 <FaPaperPlane /> Submit Review

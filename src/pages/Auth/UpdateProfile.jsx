@@ -31,8 +31,8 @@ const UpdateProfile = () => {
   };
 
   return (
-    <section className="min-h-screen custom-gradient flex items-center justify-center px-4 py-10">
-      <div className="bg-base-100 shadow rounded-2xl w-full lg:max-w-5xl mx-auto lg:flex justify-center items-center border border-primary shadow-primary ">
+    <section className="min-h-screen customGradiant3 flex items-center justify-center px-4 py-10">
+      <div className="customGradiant2  rounded-2xl w-full lg:max-w-5xl mx-auto lg:flex justify-center items-center border-2 border-primary shadow-primary hover:shadow-md ">
         {/* Profile Image with Breathing Effect */}
         <div className="w-full lg:w-2/5 flex justify-center items-center p-10">
           <motion.img
@@ -52,7 +52,7 @@ const UpdateProfile = () => {
 
         {/* Registration Form */}
         <div className="p-8 space-y-6 w-full lg:w-3/5">
-          <h2 className="text-3xl font-extrabold text-center text-neutral flex justify-center items-center">
+          <h2 className="text-4xl font-extrabold text-center flex justify-center items-center">
             Join <CollabEdNamePlate></CollabEdNamePlate>
           </h2>
           <p className="text-center text-neutral text-sm">
@@ -99,7 +99,7 @@ const UpdateProfile = () => {
             </div>
 
             {/* Submit Button */}
-            <button type="submit" className="btn btn-primary w-full">
+            <button type="submit" className="btn btn-primary w-full rounded-2xl">
               Update Profile
             </button>
           </form>

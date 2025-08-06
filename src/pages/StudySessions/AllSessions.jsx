@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaCalendarAlt, FaClock, FaInfoCircle } from "react-icons/fa";
+import {
+  FaBookOpen,
+  FaCalendarAlt,
+  FaClock,
+  FaInfoCircle,
+} from "react-icons/fa";
 import useFetchApi from "../../Api/useFetchApi";
 import SectionContainer from "../../components/SectionContainer/SectionContainer";
 import Loading from "../Others/Loading";
@@ -34,8 +39,11 @@ const AllSessions = () => {
   };
 
   return (
-    <SectionContainer className="bg-base-300 min-h-screen">
-      <h2 className="text-3xl font-bold text-center mb-6">All Study Sessions</h2>
+    <SectionContainer className="customGradiant1 min-h-screen">
+      <h2 className="flex items-center justify-center gap-3 text-4xl text-primary font-bold text-center mb-6">
+        <FaBookOpen className="text-3xl text-primary drop-shadow-md" />
+        All Study Sessions
+      </h2>
 
       {/* Card Per Page Dropdown */}
       <div className="flex justify-end mb-4">
@@ -63,30 +71,40 @@ const AllSessions = () => {
             {sessions.map((session) => (
               <div
                 key={session._id}
-                className="card bg-base-100 border border-base-200 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                className="card customGradiant2 rounded-2xl border-2 border-primary shadow-primary hover:shadow-md transition-shadow duration-300"
               >
                 <div className="card-body space-y-4">
-                  <h3 className="text-xl font-bold text-primary">{session.title}</h3>
-                  <p className="text-sm line-clamp-4">{session.description}</p>
+                  <h3 className="text-xl font-bold text-primary">
+                    {session.title}
+                  </h3>
+                  <p className="text-sm line-clamp-4 text-justify">{session.description}</p>
 
                   <div className="text-sm opacity-70 space-y-1">
                     <div className="flex items-center gap-2">
-                      <FaCalendarAlt /> <span>From: {session.registrationStart}</span>
+                      <FaCalendarAlt />{" "}
+                      <span>From: {session.registrationStart}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <FaCalendarAlt /> <span>To: {session.registrationEnd}</span>
+                      <FaCalendarAlt />{" "}
+                      <span>To: {session.registrationEnd}</span>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between pt-4">
                     <span
                       className={`badge px-4 py-2 ${
-                        getStatus(session.registrationStart, session.registrationEnd) === "Ongoing"
+                        getStatus(
+                          session.registrationStart,
+                          session.registrationEnd
+                        ) === "Ongoing"
                           ? "badge-success"
                           : "badge-error"
                       }`}
                     >
-                      {getStatus(session.registrationStart, session.registrationEnd)}
+                      {getStatus(
+                        session.registrationStart,
+                        session.registrationEnd
+                      )}
                     </span>
                     <Link to={`/sessionDetails/${session._id}`}>
                       <button className="btn btn-sm btn-outline flex items-center gap-2">
@@ -105,7 +123,9 @@ const AllSessions = () => {
               <button
                 key={idx}
                 onClick={() => handlePageChange(idx + 1)}
-                className={`btn btn-sm ${currentPage === idx + 1 ? "btn-primary" : "btn-outline"}`}
+                className={`btn btn-sm ${
+                  currentPage === idx + 1 ? "btn-primary" : "btn-outline"
+                }`}
               >
                 {idx + 1}
               </button>

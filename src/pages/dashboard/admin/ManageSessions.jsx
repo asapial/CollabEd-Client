@@ -7,6 +7,16 @@ import { MdPendingActions, MdVerified } from "react-icons/md";
 import Loading from "../../Others/Loading";
 import { ErrorToast, SuccessToast } from "../../../utils/ToastMaker";
 import { AuthContext } from "../../../main";
+import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import {
+  FaCalendarAlt,
+  FaChalkboardTeacher,
+  FaCheckCircle,
+  FaEnvelope,
+  FaMoneyBillWave,
+  FaTimesCircle,
+  FaUser,
+} from "react-icons/fa";
 
 const ManageSessions = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +27,7 @@ const ManageSessions = () => {
   const { getAllSessions, approveSession, rejectSession, deleteSession } =
     useFetchApi();
 
-  const {user}= useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
@@ -27,8 +37,9 @@ const ManageSessions = () => {
   const { data: sessions = [], isLoading } = useQuery({
     queryKey: ["allSessions"],
     queryFn: () => getAllSessions(user.email),
-
   });
+
+  console.log(sessions);
 
   const pendingSessions = sessions.filter((s) => s.status === "pending");
   const approvedSessions = sessions.filter((s) => s.status === "approved");
@@ -43,7 +54,7 @@ const ManageSessions = () => {
       id: selectedSession._id,
       amount: isPaid ? amount : 0,
     };
-    approveSession(payload,user.email)
+    approveSession(payload, user.email)
       .then(() => {
         SuccessToast("Session approved");
         queryClient.invalidateQueries(["allSessions"]);
@@ -76,7 +87,7 @@ const ManageSessions = () => {
   };
 
   const handleDelete = (id) => {
-    deleteSession(id,user.email)
+    deleteSession(id, user.email)
       .then(() => {
         SuccessToast("Session deleted");
         queryClient.invalidateQueries(["allSessions"]);
@@ -89,17 +100,21 @@ const ManageSessions = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold text-center mb-6">Manage Sessions</h2>
+    <SectionContainer className=" customGradiant3 min-h-screen">
+      <h2 className="text-4xl font-bold text-center mb-6 text-purple-500 flex items-center justify-center gap-5">
+        {" "}
+        <FaChalkboardTeacher />
+        Manage Sessions
+      </h2>
 
       <Tabs>
-        <TabList className="flex justify-center gap-4 mb-6">
-          <Tab className="tab tab-bordered text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:bg-base-200 react-tabs__tab">
-            <MdPendingActions className="text-lg text-warning" />
+        <TabList className="flex justify-center gap-6 mb-8">
+          <Tab className="tab tab-bordered text-sm font-semibold flex items-center gap-2 px-4 py-2 rounded-xl shadow-sm transition-all duration-300 hover:bg-base-200 hover:shadow-md hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warning/50 react-tabs__tab">
+            <MdPendingActions className="text-xl text-warning" />
             <span>Pending Sessions</span>
           </Tab>
-          <Tab className="tab tab-bordered text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:bg-base-200 react-tabs__tab">
-            <MdVerified className="text-lg text-success" />
+          <Tab className="tab tab-bordered text-sm font-semibold flex items-center gap-2 px-4 py-2 rounded-xl shadow-sm transition-all duration-300 hover:bg-base-200 hover:shadow-md hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success/50 react-tabs__tab">
+            <MdVerified className="text-xl text-success" />
             <span>Approved Sessions</span>
           </Tab>
         </TabList>
@@ -115,24 +130,64 @@ const ManageSessions = () => {
               {pendingSessions.map((session) => (
                 <div
                   key={session._id}
-                  className="card bg-base-100 shadow border border-base-300"
+                  className="card customGradiant2 border-2 border-primary rounded-2xl shadow-primary hover:shadow-sm"
                 >
                   <div className="card-body space-y-3">
                     <h3 className="text-lg font-semibold">{session.title}</h3>
-                    <p className="text-base-content/80 line-clamp-3">
+                    <div className="space-y-2 text-sm">
+                      <p className="flex gap-2 items-center text-base-content">
+                        <FaUser /> <span className="font-medium">Tutor:</span>{" "}
+                        {session.tutorName}
+                      </p>
+                      <p className="flex gap-2 items-center text-base-content">
+                        <FaEnvelope />{" "}
+                        <span className="font-medium">Tutor:</span>{" "}
+                        {session.tutorEmail}
+                      </p>
+                    </div>
+                    <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-2 text-sm">
+                      <p className="flex items-center gap-2">
+                        <FaCalendarAlt />{" "}
+                        <span className="font-medium">Registration:</span>{" "}
+                        {session.registrationStart} → {session.registrationEnd}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaCalendarAlt />{" "}
+                        <span className="font-medium">Class:</span>{" "}
+                        {session.classStart} → {session.classEnd}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaCalendarAlt />{" "}
+                        <span className="font-medium">Duration:</span>{" "}
+                        {session.duration}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaMoneyBillWave />
+                        <span className="font-medium">Fee:</span>{" "}
+                        {parseFloat(session.registrationFee) > 0
+                          ? `$${session.registrationFee}`
+                          : "Free"}
+                      </p>
+                    </div>
+
+                    <p className="text-base-content/80 line-clamp-5 text-justify">
                       {session.description}
                     </p>
-                    <div className="flex gap-2">
+
+                    <div className="flex gap-3">
                       <button
                         onClick={() => handleApproveClick(session)}
-                        className="btn btn-sm btn-success"
+                        className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition-all duration-200 shadow-md hover:shadow-lg"
                       >
+                        <FaCheckCircle className="text-base" />
                         Approve
                       </button>
+
                       <button
                         onClick={() => handleReject(session._id)}
-                        className="btn btn-sm btn-outline btn-error"
+                        className="flex items-center gap-2 px-4 py-2 border border-red-500 text-red-500 text-sm font-semibold rounded-lg hover:bg-red-500 hover:text-white transition-all duration-200 shadow-md hover:shadow-lg"
                       >
+                        <FaTimesCircle className="text-base" />
                         Reject
                       </button>
                     </div>
@@ -154,11 +209,46 @@ const ManageSessions = () => {
               {approvedSessions.map((session) => (
                 <div
                   key={session._id}
-                  className="card bg-base-100 shadow border border-base-300"
+                  className="card customGradiant2 border-2 border-primary rounded-2xl shadow-primary hover:shadow-sm"
                 >
                   <div className="card-body space-y-3">
                     <h3 className="text-lg font-semibold">{session.title}</h3>
-                    <p className="text-base-content/80 line-clamp-3">
+                    <div className="space-y-2 text-sm">
+                      <p className="flex gap-2 items-center text-base-content">
+                        <FaUser /> <span className="font-medium">Tutor:</span>{" "}
+                        {session.tutorName}
+                      </p>
+                      <p className="flex gap-2 items-center text-base-content">
+                        <FaEnvelope />{" "}
+                        <span className="font-medium">Tutor:</span>{" "}
+                        {session.tutorEmail}
+                      </p>
+                    </div>
+                    <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-2 text-sm">
+                      <p className="flex items-center gap-2">
+                        <FaCalendarAlt />{" "}
+                        <span className="font-medium">Registration:</span>{" "}
+                        {session.registrationStart} → {session.registrationEnd}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaCalendarAlt />{" "}
+                        <span className="font-medium">Class:</span>{" "}
+                        {session.classStart} → {session.classEnd}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaCalendarAlt />{" "}
+                        <span className="font-medium">Duration:</span>{" "}
+                        {session.duration}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <FaMoneyBillWave />
+                        <span className="font-medium">Fee:</span>{" "}
+                        {parseFloat(session.registrationFee) > 0
+                          ? `$${session.registrationFee}`
+                          : "Free"}
+                      </p>
+                    </div>
+                    <p className="text-base-content/80 line-clamp-5 text-justify">
                       {session.description}
                     </p>
                     <div className="flex gap-2">
@@ -305,7 +395,7 @@ const ManageSessions = () => {
           </div>
         </div>
       )}
-    </div>
+    </SectionContainer>
   );
 };
 

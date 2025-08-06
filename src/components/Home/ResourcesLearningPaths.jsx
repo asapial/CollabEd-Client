@@ -44,7 +44,7 @@ const ResourcesLearningPaths = () => {
         {resources.map((res) => (
           <div
             key={res.id}
-            className="card bg-base-100 border border-secondary hover:shadow-md transition-all duration-300 rounded-2xl  shadow-secondary hover:border-2 "
+            className="card bg-base-100 border border-secondary hover:shadow-md transition-shadow duration-500 rounded-2xl  shadow-secondary hover:border-2 "
           >
             <div className="card-body space-y-3">
               <h3 className="card-title text-lg flex items-center gap-2">

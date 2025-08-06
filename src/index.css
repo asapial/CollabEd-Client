@@ -131,13 +131,13 @@
 }
 
 
-.react-tabs__tab--selected {
+/* .react-tabs__tab--selected {
   @apply bg-primary text-primary-content shadow-md;
 }
 
 .react-tabs__tab {
   @apply px-4 py-2 rounded-md transition-all duration-200 hover:bg-base-200;
-}
+} */
 
  [data-theme="CollabEdLight"] .customGradiant1 {
  background: linear-gradient(

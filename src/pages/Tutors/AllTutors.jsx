@@ -23,9 +23,9 @@ const AllTutors = () => {
 
 
   return (
-    <SectionContainer>
+    <SectionContainer className="customGradiant3 min-h-screen">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold flex justify-center items-center gap-2">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary flex justify-center items-center gap-2">
           <FaGraduationCap className="text-primary" />
           Meet Our Tutors
         </h2>
@@ -38,7 +38,7 @@ const AllTutors = () => {
         {tutors.map((tutor) => (
           <div
             key={tutor._id}
-            className="rounded-xl border shadow-md bg-base-100 hover:shadow-xl transition duration-300"
+            className="rounded-xl border-2 border-primary shadow-primary hover:shadow-md transition-shadow duration-300 customGradiant2"
           >
             <figure className="w-full h-48 overflow-hidden rounded-t-xl">
               <img

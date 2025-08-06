@@ -74,7 +74,7 @@ const SixStudySession = () => {
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.5 }}
-                className=" border border-primary/25 hover:border-primary hover:shadow-primary shadow-sm customGradiant2 rounded-2xl "
+                className=" border border-primary/25 hover:border-primary hover:shadow-primary shadow-sm transition-shadow duration-500 customGradiant2 rounded-2xl "
               >
                 <div className="card-body space-y-3">
                   <h3 className="text-xl font-semibold flex items-center gap-2">
