@@ -5,6 +5,9 @@ import { FaTrash, FaEdit, FaStickyNote } from "react-icons/fa";
 import { SuccessToast, ErrorToast } from "../../../utils/ToastMaker";
 import { AuthContext } from "../../../main";
 import { Link } from "react-router";
+import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import LoadingCenter from "../../Others/LoadingCenter";
+import { MdDescription } from "react-icons/md";
 
 const ManageNotes = () => {
   const { getMyNotes, deleteNote, updateNote } = useFetchApi();
@@ -22,7 +25,7 @@ const ManageNotes = () => {
   });
 
   const handleDelete = (id) => {
-    deleteNote(id,user.email)
+    deleteNote(id, user.email)
       .then(() => {
         SuccessToast("Note deleted");
         queryClient.invalidateQueries(["myNotes"]);
@@ -38,10 +41,14 @@ const ManageNotes = () => {
   };
 
   const handleUpdateSubmit = () => {
-    updateNote(selectedNote._id, {
-      title: updatedTitle,
-      description: updatedDescription,
-    },user.email)
+    updateNote(
+      selectedNote._id,
+      {
+        title: updatedTitle,
+        description: updatedDescription,
+      },
+      user.email
+    )
       .then(() => {
         SuccessToast("Note updated");
         queryClient.invalidateQueries(["myNotes"]);
@@ -51,31 +58,42 @@ const ManageNotes = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold text-center mb-6 flex justify-center items-center gap-2">
+    <SectionContainer className=" customGradiant3 min-h-screen">
+      <h2 className="text-4xl font-bold text-center mb-6 flex justify-center items-center gap-2">
         <FaStickyNote className="text-primary" />
         My Notes
       </h2>
 
       {isLoading ? (
-        <p className="text-center">Loading notes...</p>
+        <LoadingCenter></LoadingCenter>
       ) : notes.length === 0 ? (
         <p className="text-center">You haven’t created any notes yet.</p>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {notes.map((note) => (
-            <div key={note._id} className="card bg-base-100 shadow border">
+            <div
+              key={note._id}
+              className="card customGradiant2 rounded-2xl border-2 border-primary shadow-primary hover:shadow-sm transition-shadow duration-500"
+            >
               <div className="card-body">
-                <h3 className="text-lg font-bold">{note.title}</h3>
-                <div
-                  className="text-sm opacity-80 prose max-w-full text-justify"
-                  dangerouslySetInnerHTML={{ __html: note.description }}
-                ></div>
+                <h3 className="text-lg font-bold flex items-center gap-2">
+                  <FaStickyNote className="text-primary" />
+                  {note.title}
+                </h3>
+
+                <div className="mt-3">
+                  <div className="flex items-center gap-2 mb-1 text-base font-semibold">
+                    <MdDescription className="text-primary" />
+                    Description
+                  </div>
+                  <div
+                    className="text-sm opacity-80 prose max-w-full text-justify"
+                    dangerouslySetInnerHTML={{ __html: note.description }}
+                  ></div>
+                </div>
                 <div className="flex gap-3 mt-4 justify-end">
                   <Link to={`/studentDashboard/updateNote/${note._id}`}>
-                    <button
-                      className="btn btn-sm btn-primary"
-                    >
+                    <button className="btn btn-sm btn-primary">
                       <FaEdit className="mr-1" /> Update
                     </button>
                   </Link>
@@ -136,7 +154,7 @@ const ManageNotes = () => {
           </div>
         </div>
       )}
-    </div>
+    </SectionContainer>
   );
 };
 

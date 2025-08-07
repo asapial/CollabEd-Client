@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaQuestionCircle } from "react-icons/fa";
 import { FaQ } from "react-icons/fa6";
+import SectionContainer from "../../components/SectionContainer/SectionContainer";
 
 const faqData = [
   {
@@ -38,11 +39,14 @@ const FAQ = () => {
   };
 
   return (
-    <section className="min-h-screen px-4 py-16 max-w-4xl mx-auto bg-base-100 text-neutral">
-      <h1 className="text-4xl font-bold text-center mb-4 text-primary">
-        CollabEd FAQs
-      </h1>
-      <p className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto">
+<SectionContainer className=" customGradiant1">
+      <section className="min-h-screen px-4 py-16 max-w-4xl mx-auto text-neutral">
+
+<h1 className="text-4xl font-bold text-center mb-4 text-primary flex justify-center items-center gap-2">
+  <FaQuestionCircle className="text-primary" />
+  CollabEd FAQs
+</h1>
+      <p className="text-center text-base-content/70 mb-10 max-w-4xl mx-auto">
         Have questions? We’ve got answers. Explore some of the most commonly asked questions about CollabEd.
       </p>
 
@@ -50,7 +54,7 @@ const FAQ = () => {
         {faqData.map((item, index) => (
           <div
             key={index}
-            className="border border-base-300 rounded-xl transition-all bg-base-200 hover:bg-base-300/50 shadow-sm"
+            className="customGradiant2 boxCss"
           >
             <button
               onClick={() => toggleFAQ(index)}
@@ -65,7 +69,7 @@ const FAQ = () => {
             </button>
 
             <div
-              className={`px-6 pb-5 text-sm text-base-content/80 transition-all duration-300 ease-in-out ${
+              className={`px-6 pb-5 text-base font-medium text-secondary transition-all duration-300 ease-in-out ${
                 activeIndex === index ? "block" : "hidden"
               }`}
             >
@@ -75,6 +79,7 @@ const FAQ = () => {
         ))}
       </div>
     </section>
+</SectionContainer>
   );
 };
 

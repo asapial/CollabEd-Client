@@ -15,11 +15,13 @@ import {
 import { AuthContext } from "../../../main";
 import useFetchApi from "../../../Api/useFetchApi";
 import { SuccessToast } from "../../../utils/ToastMaker";
+import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import { FiEdit } from "react-icons/fi";
 
 const CreateSession = () => {
   const { user } = useContext(AuthContext);
-  const {createSession}=useFetchApi();
-// const user=null;
+  const { createSession } = useFetchApi();
+  // const user=null;
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
@@ -30,17 +32,17 @@ const CreateSession = () => {
     };
 
     console.log("Session Data:", sessionData);
-    createSession(user.email,sessionData).then((res)=>{
+    createSession(user.email, sessionData).then((res) => {
       console.log("Session Created:", res);
-      if(res.acknowledged){
+      if (res.acknowledged) {
         SuccessToast("Session Created Successfully!");
       }
-    })
+    });
   };
 
   return (
-    <div className="min-h-screen py-10 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-10 items-start gap-6 shadow-primary shadow-sm  bg-base-100 p-8 rounded-2xl">
+    <SectionContainer className=" customGradiant3 min-h-screen">
+      <div className=" grid grid-cols-1 md:grid-cols-10 items-start gap-6 boxCss customGradiant2">
         {/* Lottie - 30% */}
         <div className="flex justify-center items-center md:col-span-3 h-full">
           <div className="">
@@ -51,7 +53,8 @@ const CreateSession = () => {
         {/* Form - 70% */}
 
         <div className="card w-full md:col-span-7 p-6  rounded-xl">
-          <h2 className="text-3xl font-bold text-center mb-8 tracking-tight">
+          <h2 className="text-4xl font-bold text-center mb-8 tracking-tight flex items-center justify-center gap-2 text-green-500">
+            <FiEdit className="" />
             Create Study Session
           </h2>
 
@@ -63,7 +66,7 @@ const CreateSession = () => {
             <div className="form-control md:col-span-2">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaChalkboard className="text-lg" />
+                  <FaChalkboard className="text-primary text-lg" />
                   Session Title
                 </span>
               </label>
@@ -71,7 +74,7 @@ const CreateSession = () => {
                 type="text"
                 placeholder="e.g. Advanced JavaScript"
                 {...register("title", { required: true })}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full "
               />
             </div>
 
@@ -79,7 +82,7 @@ const CreateSession = () => {
             <div className="form-control">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaUserAlt className="text-sm" />
+                  <FaUserAlt className="text-primary text-lg" />
                   Tutor Name
                 </span>
               </label>
@@ -96,7 +99,7 @@ const CreateSession = () => {
             <div className="form-control">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaEnvelope className="text-sm" />
+                  <FaEnvelope className="text-primary text-lg" />
                   Tutor Email
                 </span>
               </label>
@@ -113,7 +116,7 @@ const CreateSession = () => {
             <div className="form-control md:col-span-2">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaInfoCircle className="text-sm" />
+                  <FaInfoCircle className="text-primary text-lg" />
                   Session Description
                 </span>
               </label>
@@ -129,14 +132,14 @@ const CreateSession = () => {
             <div className="form-control">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaCalendarAlt className="text-sm" />
+                  <FaCalendarAlt className="text-primary text-lg" />
                   Registration Start
                 </span>
               </label>
               <input
                 type="date"
                 {...register("registrationStart")}
-                className="input input-bordered bg-base-200 w-full"
+                className="input input-bordered bg-base-100 w-full"
               />
             </div>
 
@@ -144,14 +147,14 @@ const CreateSession = () => {
             <div className="form-control">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaCalendarAlt className="text-sm" />
+                  <FaCalendarAlt className="text-primary text-lg" />
                   Registration End
                 </span>
               </label>
               <input
                 type="date"
                 {...register("registrationEnd")}
-                className="input input-bordered bg-base-200 w-full"
+                className="input input-bordered bg-base-100 w-full"
               />
             </div>
 
@@ -159,14 +162,14 @@ const CreateSession = () => {
             <div className="form-control">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaCalendarAlt className="text-sm" />
+                  <FaCalendarAlt className="text-primary text-lg" />
                   Class Start
                 </span>
               </label>
               <input
                 type="date"
                 {...register("classStart")}
-                className="input input-bordered bg-base-200 w-full"
+                className="input input-bordered bg-base-100 w-full"
               />
             </div>
 
@@ -174,14 +177,14 @@ const CreateSession = () => {
             <div className="form-control">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaCalendarAlt className="text-sm" />
+                  <FaCalendarAlt className="text-primary text-lg" />
                   Class End
                 </span>
               </label>
               <input
                 type="date"
                 {...register("classEnd")}
-                className="input input-bordered bg-base-200 w-full"
+                className="input input-bordered bg-base-100 w-full"
               />
             </div>
 
@@ -189,7 +192,7 @@ const CreateSession = () => {
             <div className="form-control ">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaRegClock className="text-base" />
+                  <FaRegClock className="text-primary text-lg" />
                   Session Duration
                 </span>
               </label>
@@ -197,7 +200,7 @@ const CreateSession = () => {
                 type="text"
                 placeholder="e.g. 4 Weeks, 8 Classes"
                 {...register("duration")}
-                className="input input-bordered bg-base-200 w-full"
+                className="input input-bordered bg-base-100 w-full"
               />
             </div>
 
@@ -205,7 +208,7 @@ const CreateSession = () => {
             <div className="form-control">
               <label className="label font-semibold">
                 <span className="label-text flex items-center gap-2">
-                  <FaDollarSign className="text-sm" />
+                  <FaDollarSign className="text-primary text-lg" />
                   Registration Fee
                 </span>
               </label>
@@ -244,7 +247,7 @@ const CreateSession = () => {
           </form>
         </div>
       </div>
-    </div>
+    </SectionContainer>
   );
 };
 

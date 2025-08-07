@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   FaBook,
   FaTag,
   FaEnvelope,
   FaFileDownload,
+  FaDownload,
 } from "react-icons/fa";
 import { AuthContext } from "../../../main";
 import useFetchApi from "../../../Api/useFetchApi";
@@ -25,6 +26,13 @@ const StudyMaterials = () => {
 
   // ✅ Extract unique session IDs
   const sessionIds = [...new Set(materials.map((m) => m.sessionId))];
+
+  // ✅ Auto-select the first session if any data exists
+  useEffect(() => {
+    if (sessionIds.length > 0 && !selectedSession) {
+      setSelectedSession(sessionIds[0]);
+    }
+  }, [sessionIds, selectedSession]);
 
   // ✅ Filter materials by selected session ID
   const filteredMaterials = selectedSession
@@ -49,10 +57,12 @@ const StudyMaterials = () => {
     }
   };
 
+  console.log(filteredMaterials);
+
   return (
-    <SectionContainer className="bg-base-100 min-h-screen">
-      <h2 className="text-3xl font-bold text-center mb-8 flex justify-center items-center gap-3">
-        <FaBook className="text-primary" /> My Learning Materials
+    <SectionContainer className="customGradiant3 min-h-screen">
+      <h2 className="text-3xl font-bold text-center text-amber-500 mb-8 flex justify-center items-center gap-3">
+        <FaBook /> My Learning Materials
       </h2>
 
       {isLoading ? (
@@ -85,7 +95,7 @@ const StudyMaterials = () => {
               {filteredMaterials.map((material) => (
                 <motion.div
                   key={material._id}
-                  className="card bg-base-100 border border-base-300 shadow-xl transition hover:shadow-2xl hover:scale-[1.01]"
+                  className="card customGradiant2 boxCss hover:scale-[1.01]"
                   whileHover={{ scale: 1.01 }}
                 >
                   {/* Image */}
@@ -102,7 +112,7 @@ const StudyMaterials = () => {
                       }
                       className="absolute top-2 right-2 bg-white/80 text-xs font-medium text-primary px-2 py-1 rounded hover:bg-primary hover:text-white transition"
                     >
-                      Download Image
+                      <FaDownload size={20}></FaDownload>
                     </button>
                   </figure>
 

@@ -71,7 +71,7 @@ const AllSessions = () => {
             {sessions.map((session) => (
               <div
                 key={session._id}
-                className="card customGradiant2 rounded-2xl border-2 border-primary shadow-primary hover:shadow-md transition-shadow duration-300"
+                className="card customGradiant2 rounded-2xl border-2 border-primary shadow-primary hover:shadow-sm transition-shadow duration-300"
               >
                 <div className="card-body space-y-4">
                   <h3 className="text-xl font-bold text-primary">

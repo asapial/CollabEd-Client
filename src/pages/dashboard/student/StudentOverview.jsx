@@ -51,14 +51,15 @@ const StudentOverview = () => {
   }
 
   return (
-    <SectionContainer>
+    <SectionContainer className=" customGradiant3 min-h-screen ">
       <h1 className="text-3xl lg:text-5xl font-bold text-center">
         Welcome Back, <span className="text-primary">{user?.displayName}</span>
       </h1>
       {/* Statistic Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
         {/* Enrolled Courses */}
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
+        <div className="customGradiant2 border-2 border-primary rounded-2xl shadow-primary  p-6 flex items-center gap-5 hover:shadow-sm transition-shadow
+         duration-300">
           <FaBookOpen className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Enrolled Courses</h3>
@@ -67,7 +68,8 @@ const StudentOverview = () => {
         </div>
 
         {/* Assignments Completed */}
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
+        <div className="customGradiant2 border-2 border-primary rounded-2xl shadow-primary  p-6 flex items-center gap-5 hover:shadow-sm transition-shadow
+         duration-300">
           <FaClipboardList className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Assignments Completed</h3>
@@ -76,7 +78,8 @@ const StudentOverview = () => {
         </div>
 
         {/* Upcoming Exams */}
-        <div className="bg-base-200 rounded-xl shadow-primary shadow-sm p-6 flex items-center gap-5 hover:shadow-lg transition duration-300">
+        <div className="customGradiant2 border-2 border-primary rounded-2xl shadow-primary  p-6 flex items-center gap-5 hover:shadow-sm transition-shadow
+         duration-300">
           <FaChartBar className="text-4xl text-primary" />
           <div>
             <h3 className="text-lg font-semibold">Upcoming Exams</h3>
@@ -86,8 +89,8 @@ const StudentOverview = () => {
       </div>
 
       {/* Performance Chart */}
-      <div className="bg-base-100 shadow-xl rounded-xl p-6">
-        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+      <div className="customGradiant2 rounded-2xl shadow-primary border-2 border-primary py-10 hover:shadow-sm  px-6  transition-shadow duration-500">
+        <h2 className="text-3xl justify-center  font-semibold mb-4 flex items-center gap-2">
           <FaUserGraduate className="text-primary" />
           Performance Overview
         </h2>

@@ -8,6 +8,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import CollabEdNamePlate from "../NamePlate/CollabEdNamePlate";
+import { NavLink } from "react-router";
 
 const Footer = () => {
   return (
@@ -15,7 +16,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand */}
         <div>
-          <h2 className="text-xl font-bold text-primary mb-3"><CollabEdNamePlate></CollabEdNamePlate></h2>
+          <h2 className="text-xl font-bold text-primary mb-3">
+            <CollabEdNamePlate></CollabEdNamePlate>
+          </h2>
           <p className="text-sm opacity-80">
             Your trusted collaborative education platform. Join study sessions,
             explore learning paths, and grow together.
@@ -40,22 +43,94 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:text-primary">Home</a></li>
-            <li><a href="/sessions" className="hover:text-primary">Sessions</a></li>
-            <li><a href="/tutors" className="hover:text-primary">Tutors</a></li>
-            <li><a href="/resources" className="hover:text-primary">Resources</a></li>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-semibold" : "hover:text-primary"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/allSessions"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-semibold" : "hover:text-primary"
+                }
+              >
+                Sessions
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tutors"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-semibold" : "hover:text-primary"
+                }
+              >
+                Tutors
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/resources"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-semibold" : "hover:text-primary"
+                }
+              >
+                Resources
+              </NavLink>
+            </li>
           </ul>
         </div>
 
         {/* Support */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Support</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a href="/faq" className="hover:text-primary">FAQ</a></li>
-            <li><a href="/contact" className="hover:text-primary">Contact</a></li>
-            <li><a href="/privacy" className="hover:text-primary">Privacy Policy</a></li>
-            <li><a href="/terms" className="hover:text-primary">Terms of Service</a></li>
-          </ul>
+<ul className="space-y-2 text-sm">
+  <li>
+    <NavLink
+      to="/faq"
+      className={({ isActive }) =>
+        isActive ? "text-primary font-semibold" : "hover:text-primary"
+      }
+    >
+      FAQ
+    </NavLink>
+  </li>
+  <li>
+    <NavLink
+      to="/contact"
+      className={({ isActive }) =>
+        isActive ? "text-primary font-semibold" : "hover:text-primary"
+      }
+    >
+      Contact
+    </NavLink>
+  </li>
+  <li>
+    <NavLink
+      to="/privacy"
+      className={({ isActive }) =>
+        isActive ? "text-primary font-semibold" : "hover:text-primary"
+      }
+    >
+      Privacy Policy
+    </NavLink>
+  </li>
+  <li>
+    <NavLink
+      to="/terms"
+      className={({ isActive }) =>
+        isActive ? "text-primary font-semibold" : "hover:text-primary"
+      }
+    >
+      Terms of Service
+    </NavLink>
+  </li>
+</ul>
         </div>
 
         {/* Contact Info */}

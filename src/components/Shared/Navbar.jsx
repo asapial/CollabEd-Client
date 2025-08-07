@@ -101,7 +101,7 @@ const Navbar = () => {
 
       {user && (
         <button
-          className="btn btn-primary rounded-2xl md:hidden"
+          className="btn buttonCss rounded-xl md:hidden"
           onClick={handleSignOut}
         >
           Logout
@@ -114,7 +114,7 @@ const Navbar = () => {
             to="/login"
             className={({ isActive }) =>
               isActive
-                ? "text-primary font-semibold transition md:hidden"
+                ? "text-primary font-semibold transition  md:hidden"
                 : "hover:text-primary transition md:hidden"
             }
           >
@@ -136,7 +136,7 @@ const Navbar = () => {
   );
   return (
     <>
-      <div className="fixed top-0 z-50 w-full bg-base-100 shadow">
+      <div className="fixed top-0 z-50 w-full customGradiant1 shadow">
         <div className="navbar max-w-7xl mx-auto">
           <div className="navbar-start">
             <div className="dropdown">
@@ -167,7 +167,7 @@ const Navbar = () => {
                 {list}
               </ul>
             </div>
-            <Link className="text-2xl">
+            <Link className="text-3xl">
               <CollabEdNamePlate />
             </Link>
           </div>
@@ -179,7 +179,7 @@ const Navbar = () => {
           <div className="navbar-end flex justify-end items-center gap-2">
             {user && (
               <button
-                className="btn btn-primary rounded-2xl hidden md:block"
+                className="btn buttonCss rounded-xl shadow-primary hover:shadow-sm transition-shadow duration-500 text-white hidden border border-primary md:block"
                 onClick={handleSignOut}
               >
                 Logout
@@ -191,10 +191,10 @@ const Navbar = () => {
 
             {!user && (
               <>
-                <button className="btn btn-primary rounded-2xl  hidden md:block">
+                <button className="btn buttonCss rounded-xl shadow-primary hover:shadow-sm transition-shadow duration-500 text-white hidden border border-primary md:block">
                   <Link to={"/login"}>Login</Link>
                 </button>
-                <button className="btn btn-primary rounded-2xl  hidden md:block">
+                <button className="btn buttonCss rounded-xl shadow-primary hover:shadow-sm transition-shadow duration-500 text-white hidden border border-primary md:block">
                   <Link to={"/register"}>Registration</Link>
                 </button>
               </>

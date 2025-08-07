@@ -4,6 +4,7 @@ import useFetchApi from "../../../Api/useFetchApi";
 import { FaExternalLinkAlt, FaFolderOpen } from "react-icons/fa";
 import Loading from "../../Others/Loading";
 import { AuthContext } from "../../../main";
+import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 const ViewMaterials = () => {
     const { user } = useContext(AuthContext);
@@ -12,9 +13,8 @@ const ViewMaterials = () => {
   const { data: materials = [], isLoading } = useQuery({
        queryKey: ["allMaterials", user?.email],
     queryFn: async () => {
-      // const res = await fetch(`/api/my-sessions?tutorEmail=${user?.email}`);
       const res = await getAllMaterials(user?.email);
-      console.log("Fetched Sessions:", res);
+
       return res;
     },
     enabled: !!user?.email,
@@ -24,10 +24,12 @@ const ViewMaterials = () => {
     return <Loading></Loading>
   }
 
+  console.log(materials)
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold text-center mb-8 flex justify-center items-center gap-2">
-        <FaFolderOpen className="text-primary" /> Study Materials
+<SectionContainer className=" customGradiant3 min-h-screen">
+      <h2 className="text-4xl text-amber-500 font-bold text-center mb-8 flex justify-center items-center gap-2">
+        <FaFolderOpen className="" /> Study Materials
       </h2>
 
       {materials.length === 0 ? (
@@ -37,7 +39,7 @@ const ViewMaterials = () => {
           {materials.map((material) => (
             <div
               key={material._id}
-              className="card bg-base-100 shadow-md border border-base-300 hover:shadow-xl transition-all duration-300"
+              className="card customGradiant2 boxCss"
             >
               <figure>
                 <img
@@ -56,7 +58,7 @@ const ViewMaterials = () => {
                     href={material.driveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-sm btn-outline btn-primary w-full flex items-center justify-center gap-2"
+                    className="btn btn-sm btn-outline btn-primary w-full flex items-center justify-center gap-2 rounded-xl"
                   >
                     <FaExternalLinkAlt /> View on Google Drive
                   </a>
@@ -66,7 +68,8 @@ const ViewMaterials = () => {
           ))}
         </div>
       )}
-    </div>
+    
+</SectionContainer>
   );
 };
 

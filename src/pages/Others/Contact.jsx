@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import SectionContainer from "../../components/SectionContainer/SectionContainer";
+import { MdContactMail } from "react-icons/md";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,12 +22,13 @@ const Contact = () => {
   };
 
   return (
-    <section className="min-h-screen bg-base-100 px-4 py-16 max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold text-center text-primary mb-4">
-        Contact CollabEd
-      </h1>
-      <p className="text-center text-base-content/70 mb-10 max-w-xl mx-auto">
-        Have a question, suggestion, or just want to say hi? We'd love to hear from you.
+    <SectionContainer className=" customGradiant1">
+    <h1 className="text-4xl font-bold text-center text-primary mb-4 flex items-center justify-center gap-2">
+     <MdContactMail/> Contact CollabEd 
+    </h1>
+      <p className="text-center mb-10 max-w-xl mx-auto">
+        Have a question, suggestion, or just want to say hi? We'd love to hear
+        from you.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
@@ -31,7 +38,9 @@ const Contact = () => {
             <FaEnvelope className="text-xl text-secondary mt-1" />
             <div>
               <h4 className="font-semibold text-base-content">Email</h4>
-              <p className="text-sm text-base-content/70">support@collabed.com</p>
+              <p className="text-sm text-base-content/70">
+                support@collabed.com
+              </p>
             </div>
           </div>
 
@@ -47,9 +56,7 @@ const Contact = () => {
             <FaMapMarkerAlt className="text-xl text-secondary mt-1" />
             <div>
               <h4 className="font-semibold text-base-content">Location</h4>
-              <p className="text-sm text-base-content/70">
-                Dhaka, Bangladesh
-              </p>
+              <p className="text-sm text-base-content/70">Dhaka, Bangladesh</p>
             </div>
           </div>
 
@@ -64,9 +71,14 @@ const Contact = () => {
         </div>
 
         {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6 bg-base-200 p-8 rounded-2xl shadow border border-base-300">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 bg-base-200 p-8 rounded-2xl shadow border border-base-300"
+        >
           <div>
-            <label className="block mb-1 font-medium text-base-content">Your Name</label>
+            <label className="block mb-1 font-medium text-base-content">
+              Your Name
+            </label>
             <input
               type="text"
               name="name"
@@ -79,7 +91,9 @@ const Contact = () => {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-base-content">Your Email</label>
+            <label className="block mb-1 font-medium text-base-content">
+              Your Email
+            </label>
             <input
               type="email"
               name="email"
@@ -92,7 +106,9 @@ const Contact = () => {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-base-content">Message</label>
+            <label className="block mb-1 font-medium text-base-content">
+              Message
+            </label>
             <textarea
               name="message"
               rows="4"
@@ -109,7 +125,7 @@ const Contact = () => {
           </button>
         </form>
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 
