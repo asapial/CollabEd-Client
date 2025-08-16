@@ -4,6 +4,7 @@ import SixStudySession from '../../components/Home/SixStudySession';
 import TopCollaborations from '../../components/Home/TopCollaborations';
 import UpcomingLiveCollaborations from '../../components/Home/UpcomingLiveCollaborations';
 import ResourcesLearningPaths from '../../components/Home/ResourcesLearningPaths';
+import SuccessStories from '../../components/Home/SuccessStories';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <TopCollaborations></TopCollaborations>
             <ResourcesLearningPaths></ResourcesLearningPaths>
             <UpcomingLiveCollaborations></UpcomingLiveCollaborations>
+            <SuccessStories></SuccessStories>
         </div>
     );
 };

@@ -34,6 +34,8 @@ const SixStudySession = () => {
     return now >= startDate && now <= endDate ? "Ongoing" : "Closed";
   };
 
+  console.log("Approved Sessions:", approvedSessions);
+
   return (
     <SectionContainer className="customGradiant1">
 
