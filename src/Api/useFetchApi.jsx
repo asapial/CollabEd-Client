@@ -120,11 +120,11 @@ const useFetchApi = () => {
     return axiosSecure.get("/getSixSessions").then((res) => res.data);
   };
 
-  const getAllSessionsGeneral = (page = 1, limit = 6) => {
-    return axiosSecure
-      .get(`/getAllSessionsGeneral?page=${page}&limit=${limit}`)
-      .then((res) => res.data);
-  };
+const getAllSessionsGeneral = (page = 1, limit = 6, sortBy = "registrationStart", order = "asc") => {
+  return axiosSecure
+    .get(`/getAllSessionsGeneral?page=${page}&limit=${limit}&sortBy=${sortBy}&order=${order}`)
+    .then((res) => res.data);
+};
 
   const getSessionById = (id) => {
     return axiosSecure.get(`/getSessionById/${id}`).then((res) => res.data);
