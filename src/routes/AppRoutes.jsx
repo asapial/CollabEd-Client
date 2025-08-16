@@ -33,6 +33,7 @@ import FAQ from "../pages/Others/FAQ";
 import Contact from "../pages/Others/Contact";
 import Privacy from "../pages/Others/Privacy";
 import TermsAndConditions from "../pages/Others/TermsAndConditions";
+import ErrorPage from "../pages/Others/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -86,7 +87,12 @@ const router = createBrowserRouter([
       {
           path:"terms",
           Component: TermsAndConditions
-      }
+      },
+      {
+          path:"*",
+          Component: ErrorPage
+      },
+
     ],
   },
   {
