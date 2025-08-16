@@ -6,6 +6,9 @@ import UpcomingLiveCollaborations from '../../components/Home/UpcomingLiveCollab
 import ResourcesLearningPaths from '../../components/Home/ResourcesLearningPaths';
 import SuccessStories from '../../components/Home/SuccessStories';
 import LearningAchievements from '../../components/Home/LearningAchievements';
+import CommunityHighlights from '../../components/Home/CommunityHighlights';
+import Testimonials from '../../components/Home/Testimonials';
+import HowItWorks from '../../components/Home/HowItWorks';
 
 const Home = () => {
     return (
@@ -17,6 +20,10 @@ const Home = () => {
             <UpcomingLiveCollaborations></UpcomingLiveCollaborations>
             <SuccessStories></SuccessStories>
             <LearningAchievements></LearningAchievements>
+            <CommunityHighlights></CommunityHighlights>
+            <HowItWorks></HowItWorks>
+            <Testimonials></Testimonials>
+
         </div>
     );
 };
