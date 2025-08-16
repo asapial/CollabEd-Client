@@ -5,6 +5,7 @@ import TopCollaborations from '../../components/Home/TopCollaborations';
 import UpcomingLiveCollaborations from '../../components/Home/UpcomingLiveCollaborations';
 import ResourcesLearningPaths from '../../components/Home/ResourcesLearningPaths';
 import SuccessStories from '../../components/Home/SuccessStories';
+import LearningAchievements from '../../components/Home/LearningAchievements';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <ResourcesLearningPaths></ResourcesLearningPaths>
             <UpcomingLiveCollaborations></UpcomingLiveCollaborations>
             <SuccessStories></SuccessStories>
+            <LearningAchievements></LearningAchievements>
         </div>
     );
 };
